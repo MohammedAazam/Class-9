@@ -1,1039 +1,1127 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Cell Lab — Aki International School</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#241B3A">
+  <meta name="description" content="EduAKI Tech X 2030 — a school-hosted education and technology summit bringing educators, school leaders, technologists, students and parents together to imagine the future of learning.">
+  <meta property="og:title" content="EduAKI Tech X 2030 — AKI Group of Institutions">
+  <meta property="og:description" content="Are we preparing today's children for the world of 2030? EduAKI Tech X 2030 brings the education community together to explore that question.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og-image-placeholder.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EduAKI Tech X 2030">
+  <meta name="twitter:description" content="A premium education + technology summit by AKI Group of Institutions.">
+  <meta name="twitter:image" content="/og-image-placeholder.jpg">
+  <title>EduAKI Tech X 2030 — AKI Group of fInstitutions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23241B3A'/%3E%3Cpath d='M16 46 28 18h8l12 28h-8l-2.8-7H26.8L24 46h-8Zm13.5-13h5L32 26l-2.5 7Z' fill='%2369C7C5'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap"
-    rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Space Grotesk', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            glass: 'rgba(30, 41, 59, 0.6)',
-            glassBorder: 'rgba(255, 255, 255, 0.1)',
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
+    /* =========================================================
+       EDUAKI TECH X 2030
+       One coherent design system — plum / teal / coral / ivory
+       ========================================================= */
+    :root {
+      --plum-950: #171126;
+      --plum-900: #241B3A;
+      --plum-800: #30234A;
+      --plum-700: #3B2B55;
+      --plum-100: #EEE9F4;
+
+      --teal-700: #246D78;
+      --teal-600: #2F8F9D;
+      --teal-500: #4BAFB1;
+      --teal-300: #69C7C5;
+      --teal-100: #E8F4F3;
+
+      --coral-500: #F27A65;
+      --coral-100: #FBE9E4;
+
+      --sand-50: #FFFDF8;
+      --sand-100: #F8F3EA;
+      --sand-200: #EFE7DC;
+      --sand-300: #DED5C8;
+      --sand-500: #8C8173;
+
+      --ink: #241B3A;
+      --muted: #74695D;
+      --white: #FFFFFF;
+
+      --font-display: "Fraunces", Georgia, serif;
+      --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      --text-xs: .72rem;
+      --text-sm: .84rem;
+      --text-md: .98rem;
+      --text-lg: 1.12rem;
+      --text-xl: 1.5rem;
+      --text-2xl: clamp(2.15rem, 4vw, 3.65rem);
+      --text-hero: clamp(3.35rem, 8vw, 7.5rem);
+
+      --space-1: .35rem;
+      --space-2: .6rem;
+      --space-3: .85rem;
+      --space-4: 1.1rem;
+      --space-5: 1.5rem;
+      --space-6: 2rem;
+      --space-7: 3rem;
+      --space-8: 4.5rem;
+      --space-9: 6.5rem;
+      --space-10: 8rem;
+
+      --radius-sm: .55rem;
+      --radius-md: .85rem;
+      --radius-lg: 1.25rem;
+      --radius-xl: 1.75rem;
+      --radius-pill: 999px;
+
+      --shadow-sm: 0 8px 24px rgba(36, 27, 58, .07);
+      --shadow-md: 0 18px 48px rgba(36, 27, 58, .10);
+      --shadow-lg: 0 30px 80px rgba(23, 17, 38, .16);
+
+      --container: 1180px;
+      --nav-height: 74px;
+      --transition: 180ms ease;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      background-color: #020617;
-      color: #f8fafc;
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: var(--sand-50);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
-
-    ::selection {
-      background-color: #fbbf24;
-      color: #020617;
+    body.menu-open { overflow: hidden; }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible {
+      outline: 3px solid var(--teal-300);
+      outline-offset: 4px;
     }
+    ::selection { background: var(--teal-300); color: var(--plum-950); }
 
-    /* Glassmorphism utilities */
-    .glass-panel {
-      background: rgba(15, 23, 42, 0.7);
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .wrap { width: min(var(--container), calc(100% - 40px)); margin-inline: auto; }
+    .section { padding-block: var(--space-9); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .7rem;
+      margin-bottom: var(--space-4);
+      color: var(--teal-600);
+      font-size: var(--text-xs);
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: ""; width: 26px; height: 1px; background: var(--coral-500);
+    }
+    .section-head { max-width: 800px; margin-bottom: var(--space-7); }
+    .section-head h2 {
+      margin: 0 0 var(--space-4);
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      line-height: 1.08;
+      letter-spacing: -.025em;
+      font-weight: 600;
+    }
+    .section-head p { margin: 0; color: var(--muted); max-width: 690px; }
+
+    /* Navigation */
+    .site-nav {
+      position: fixed; inset: 0 0 auto; z-index: 1000;
+      height: var(--nav-height);
+      background: rgba(36, 27, 58, .90);
+      border-bottom: 1px solid rgba(255,255,255,.10);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
-
-    /* Hide panels by default, show with animation */
-    .panel {
-      display: none;
-      opacity: 0;
+    .nav-inner {
+      height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
     }
-
-    .panel.active {
-      display: block;
-      animation: smoothFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    .brand {
+      display: inline-flex; align-items: center; gap: .8rem;
+      min-width: max-content; color: var(--white);
+      font-size: .78rem; font-weight: 700; letter-spacing: .02em;
     }
-
-    @keyframes smoothFadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(10px) scale(0.99);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    /* Custom UI elements that are complex for pure Tailwind */
-    .tl-node {
-      transition: all 0.3s ease;
-    }
-
-    .tl-node.active .dot {
-      background: #fbbf24;
-      border-color: #fbbf24;
-      box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
-    }
-
-    .tl-node.active .yr {
-      color: #f8fafc;
-      font-weight: 700;
-    }
-
-    /* Cell Wall & Plasmolysis */
-    .wall-frame {
-      width: 220px;
-      height: 220px;
-      border: 6px solid #34d399;
-      border-radius: 18px;
-      position: relative;
-      margin: 0 auto;
-      background: rgba(52, 211, 153, 0.05);
-    }
-
-    .wall-inner {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(56, 189, 248, 0.25);
-      border: 2px solid #38bdf8;
-      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-      inset: 8px;
-    }
-
-    .wall-inner.plasmolysed {
-      inset: 48px;
-      background: rgba(251, 113, 133, 0.2);
-      border-color: #fb7185;
-    }
-
-    /* Membrane Transport */
-    .particle {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #38bdf8;
-      position: absolute;
-      transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .osmo-cell {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: #fb7185;
-      transition: all 0.8s ease;
-      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
-    }
-
-    .osmo-cell.swollen {
-      width: 145px;
-      height: 145px;
-      background: #4ade80;
-    }
-
-    .osmo-cell.shrunk {
-      width: 50px;
-      height: 50px;
-      background: #f87171;
-      border-radius: 40% 60% 70% 30%;
-    }
-
-    .endo-vesicle {
-      position: absolute;
-      width: 36px;
-      height: 36px;
-      border: 2px dashed #fbbf24;
-      border-radius: 50%;
-      opacity: 0;
-      transition: opacity 0.6s ease 0.5s;
-    }
-
-    .endo-vesicle.show {
-      opacity: 1;
-    }
-
-    /* Chromosomes and Cells */
-    .chrom {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, .4) inset;
-    }
-
-    .chrom-pair {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      align-items: center;
-    }
-
-    .cell-circle {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      border: 3px solid rgba(255, 255, 255, 0.8);
-      background: rgba(255, 255, 255, 0.05);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px;
-    }
-
-    .cell-elongated {
-      width: 280px;
-      height: 120px;
-      border-radius: 60px;
-      border: 3px dashed rgba(255, 255, 255, 0.4);
-      background: rgba(255, 255, 255, 0.03);
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      padding: 0 20px;
-    }
-
-    /* Diagram Markers */
-    #imageWrapper {
-      display: inline-block;
-      width: 100%;
-      max-width: 720px;
-      position: relative;
-      overflow: hidden;
-      background: rgba(15, 23, 42, 0.45);
-      vertical-align: top;
-    }
-
-    #lcImage {
-      display: block;
-      width: 100%;
-      height: auto;
+    .aki-logo {
+      width: 74px;
+      height: 58px;
       object-fit: contain;
+      object-position: center;
+      flex: 0 0 auto;
     }
-
-    /* The overlay container is absolutely positioned inside the wrapper and will always mirror the rendered image size. */
-    #lcDiagram {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
+    .brand-divider {
+      width: 1px;
+      height: 38px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,.35), transparent);
+      flex: 0 0 1px;
     }
-
-    #lcDiagram {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
+    .brand-copy { display: grid; line-height: 1.05; }
+    .brand-copy strong { font-size: .9rem; letter-spacing: -.015em; }
+    .brand-copy strong b { color: var(--coral-500); font-weight: 800; }
+    .brand-copy span { color: #BFC5D6; font-size: .66rem; font-weight: 500; margin-top: .28rem; }
+    .nav-links { display: flex; align-items: center; gap: .25rem; }
+    .nav-links a {
+      min-height: 44px; display: inline-flex; align-items: center;
+      padding: .55rem .85rem; border-radius: var(--radius-sm);
+      color: #D9D4E0; font-size: .77rem; font-weight: 600;
+      transition: color var(--transition), background var(--transition);
     }
-
-    .marker {
-      position: absolute;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: #fbbf24;
-      color: #111827;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: 700;
-      font-size: 15px;
-
-      transform: translate(-50%, -50%);
-
+    .nav-links a:hover { color: var(--white); background: rgba(255,255,255,.06); }
+    .nav-links .nav-cta {
+      margin-left: .4rem; color: var(--plum-950);
+      background: var(--sand-50); padding-inline: 1rem;
+    }
+    .nav-links .nav-cta:hover { background: var(--white); color: var(--plum-950); }
+    .nav-toggle {
+      display: none; width: 46px; height: 46px; border: 1px solid rgba(255,255,255,.16);
+      border-radius: var(--radius-sm); background: rgba(255,255,255,.04); color: var(--white);
       cursor: pointer;
-      pointer-events: auto;
-
-      box-shadow:
-        0 0 0 3px #0f172a,
-        0 8px 18px rgba(0, 0, 0, .35);
-
-      transition: .2s;
-      z-index: 2;
     }
+    .nav-toggle svg { width: 20px; height: 20px; margin: auto; }
 
-    .marker:hover {
-      transform: translate(-50%, -50%) scale(1.15);
+    /* Hero */
+    .hero {
+      position: relative; min-height: 840px; padding-top: calc(var(--nav-height) + 100px);
+      padding-bottom: 90px; overflow: hidden; color: var(--white);
+      background:
+        radial-gradient(circle at 78% 25%, rgba(105,199,197,.17), transparent 24%),
+        radial-gradient(circle at 15% 80%, rgba(242,122,101,.10), transparent 28%),
+        linear-gradient(135deg, #21182F 0%, #302047 58%, #243E52 100%);
     }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .9;
+      background-image:
+        linear-gradient(rgba(105,199,197,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(105,199,197,.045) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+    .hero::after {
+      content: "2030"; position: absolute; right: -2vw; bottom: -2.3rem;
+      font-family: var(--font-display); font-size: clamp(12rem, 29vw, 28rem); font-weight: 600;
+      line-height: .7; letter-spacing: -.08em; color: rgba(255,255,255,.035); pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 2; }
+    .hero-lockup {
+      display: inline-flex; align-items: center; gap: .65rem; margin-bottom: 1.5rem;
+      color: var(--teal-300); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    }
+    .hero-lockup::before { content: ""; width: 32px; height: 1px; background: var(--coral-500); }
+    .hero h1 {
+      max-width: 980px; margin: 0;
+      font-family: var(--font-display); font-weight: 500; font-size: var(--text-hero);
+      line-height: .96; letter-spacing: -.045em;
+    }
+    .hero h1 em { color: var(--teal-300); font-style: normal; }
+    .hero-sub {
+      max-width: 700px; margin: 2rem 0 0; color: rgba(255,255,255,.74);
+      font-size: clamp(1rem, 1.5vw, 1.18rem); line-height: 1.7;
+    }
+    .hero-meta {
+      display: grid; grid-template-columns: repeat(4, max-content); gap: .65rem;
+      margin-top: 2rem;
+    }
+    .meta-item {
+      display: inline-flex; align-items: center; gap: .55rem;
+      min-height: 42px; padding: .55rem .8rem; border: 1px solid rgba(255,255,255,.13);
+      border-radius: var(--radius-pill); background: rgba(255,255,255,.045);
+      color: #E4E2EA; font-size: .72rem; font-weight: 600;
+    }
+    .meta-icon { width: 18px; height: 18px; color: var(--teal-300); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
+    .btn {
+      min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      padding: .75rem 1rem; border-radius: var(--radius-sm); border: 1px solid transparent;
+      font-size: .78rem; font-weight: 800; cursor: pointer; transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--sand-50); color: var(--plum-950); }
+    .btn-primary:hover { background: var(--white); }
+    .btn-secondary { color: var(--white); background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.20); }
+    .btn-secondary:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.3); }
+    .btn-teal { background: var(--teal-600); color: var(--white); }
+    .btn-teal:hover { background: var(--teal-700); }
+    .hero-side {
+      position: absolute; right: 4%; top: 52%; transform: translateY(-50%);
+      width: min(400px, 34vw); aspect-ratio: 1; pointer-events: none;
+    }
+    .orbit { position: absolute; inset: 5%; border: 1px solid rgba(105,199,197,.22); border-radius: 50%; transform: rotate(-18deg); }
+    .orbit:nth-child(2) { inset: 17%; transform: rotate(38deg); border-color: rgba(255,255,255,.14); }
+    .orbit:nth-child(3) { inset: 29%; transform: rotate(72deg); border-color: rgba(242,122,101,.18); }
+    .orbit-core {
+      position: absolute; inset: 33%; display: grid; place-items: center; text-align: center;
+      border-radius: 28%; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 0 70px rgba(105,199,197,.12), inset 0 1px 0 rgba(255,255,255,.10); backdrop-filter: blur(10px);
+    }
+    .orbit-core strong { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); line-height: .8; font-weight: 500; }
+    .orbit-core span { display: block; margin-top: .5rem; color: #BFD9D8; font-size: .48rem; letter-spacing: .17em; text-transform: uppercase; }
+    .orbit-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--teal-300); box-shadow: 0 0 20px rgba(105,199,197,.8); }
+    .dot-a { left: 14%; top: 29%; } .dot-b { right: 10%; top: 21%; width: 7px; height: 7px; background: var(--coral-500); box-shadow: 0 0 16px rgba(242,122,101,.7); } .dot-c { right: 17%; bottom: 15%; width: 8px; height: 8px; background: var(--sand-50); box-shadow: 0 0 16px rgba(255,253,248,.55); }
 
-    .marker.filled {
-      background: #2dd4bf;
-      color: #020617;
-    }
+    /* Theme */
+    .theme-band { padding-block: var(--space-8); background: var(--sand-50); border-bottom: 1px solid var(--sand-300); }
+    .theme-label { margin-bottom: .9rem; color: var(--sand-500); font-size: var(--text-xs); font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    .theme-quote { max-width: 1050px; font-family: var(--font-display); font-size: clamp(1.7rem, 3.3vw, 3rem); line-height: 1.18; letter-spacing: -.02em; }
+    .theme-quote strong:nth-of-type(1), .theme-quote strong:nth-of-type(3) { color: var(--teal-600); }
+    .theme-quote strong:nth-of-type(2) { color: var(--coral-500); }
 
-    .marker.wrong {
-      background: #fb7185;
-      color: white;
-    }
+    /* About */
+    .about { background: var(--sand-100); }
+    .why-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(3rem, 7vw, 7rem); align-items: start; }
+    .why-copy { max-width: 620px; }
+    .why-copy p { margin: 0 0 1.1rem; color: var(--muted); font-size: 1rem; }
+    .focus-list { border-top: 1px solid var(--sand-300); }
+    .focus-item { display: grid; grid-template-columns: 42px 1fr; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--sand-300); }
+    .focus-item:hover { background: rgba(47,143,157,.025); }
+    .focus-number { color: var(--teal-600); font-family: var(--font-display); font-style: italic; font-size: 1.15rem; }
+    .focus-item h3 { margin: 0 0 .25rem; font-size: .96rem; line-height: 1.35; }
+    .focus-item p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+    .mini-icon { width: 32px; height: 32px; margin-bottom: .65rem; color: var(--teal-600); }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
+    /* Experience */
+    .experience { background: var(--plum-900); color: var(--white); position: relative; overflow: hidden; }
+    .experience::before { content:""; position:absolute; width: 520px; height:520px; right:-240px; top:-220px; border-radius:50%; background: radial-gradient(circle, rgba(105,199,197,.15), transparent 68%); }
+    .experience .section-head { position: relative; z-index:1; }
+    .experience .section-head h2 { color: var(--white); }
+    .experience .section-head p { color: #C9C0D1; }
+    .experience-grid { position: relative; z-index:1; display:grid; grid-template-columns: repeat(2, 1fr); border:1px solid rgba(255,255,255,.10); border-radius: var(--radius-lg); overflow:hidden; background:rgba(255,255,255,.035); }
+    .experience-item { display:grid; grid-template-columns: 52px 1fr 30px; gap:1rem; min-height:190px; padding:1.5rem; border-right:1px solid rgba(255,255,255,.09); border-bottom:1px solid rgba(255,255,255,.09); transition: background var(--transition); }
+    .experience-item:nth-child(2n) { border-right:0; }
+    .experience-item:nth-last-child(-n+2) { border-bottom:0; }
+    .experience-item:hover { background:rgba(105,199,197,.055); }
+    .experience-index { color: var(--teal-300); font-family: var(--font-display); font-size: 1.1rem; font-style:italic; }
+    .experience-icon { width:38px; height:38px; display:grid; place-items:center; border-radius: .75rem; color:var(--teal-300); background:rgba(105,199,197,.08); border:1px solid rgba(105,199,197,.18); }
+    .experience-label { margin-bottom:.35rem; color:#8FB7B6; font-size:.64rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+    .experience-item h3 { margin:0 0 .45rem; font-size:1.05rem; line-height:1.3; }
+    .experience-item p { margin:0; color:#BEB5C5; font-size:.8rem; line-height:1.55; }
+    .experience-mark { align-self:start; color:#A8D8D6; font-size:1rem; }
 
-    ::-webkit-scrollbar-track {
-      background: rgba(15, 23, 42, 0.5);
-      border-radius: 10px;
-    }
+    /* Agenda */
+    .agenda { background: var(--sand-50); }
+    .timeline { position:relative; max-width: 1000px; margin-inline:auto; }
+    .timeline::before { content:""; position:absolute; left:112px; top:0; bottom:0; width:1px; background:var(--sand-300); }
+    .agenda-item { display:grid; grid-template-columns:90px 24px 1fr; gap:1.25rem; position:relative; padding:0 0 1.35rem; }
+    .agenda-time { padding-top:.1rem; color:var(--teal-600); font-size:.72rem; font-weight:800; text-align:right; }
+    .agenda-node { width:9px; height:9px; margin-top:.4rem; justify-self:center; border-radius:50%; background:var(--teal-600); box-shadow:0 0 0 5px var(--sand-50), 0 0 0 6px rgba(47,143,157,.18); }
+    .agenda-content { padding:0 0 1.1rem; border-bottom:1px solid var(--sand-300); }
+    .agenda-item:last-child .agenda-content { border-bottom:0; }
+    .session-type { display:inline-flex; margin-bottom:.35rem; color:var(--coral-500); font-size:.62rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; }
+    .agenda-content h3 { margin:0; font-size:.95rem; line-height:1.4; }
+    .agenda-content p { margin:.35rem 0 0; color:var(--muted); font-size:.78rem; }
+    .agenda-item.keynote .agenda-content { padding: .9rem 1rem 1.1rem; border:1px solid #D7C8BE; border-radius:var(--radius-md); background:#FFF8F4; }
+    .agenda-item.keynote .agenda-node { background:var(--coral-500); box-shadow:0 0 0 5px var(--sand-50), 0 0 0 6px rgba(242,122,101,.20); }
 
-    ::-webkit-scrollbar-thumb {
-      background: rgba(71, 85, 105, 0.8);
-      border-radius: 10px;
-    }
+    /* Guests */
+    .guests { background: var(--sand-200); }
+    .guest-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--sand-300); border:1px solid var(--sand-300); }
+    .guest-card { position:relative; min-height:205px; padding:1.45rem; background:var(--sand-50); }
+    .guest-tier { display:inline-flex; margin-bottom:1.5rem; padding:.3rem .55rem; border-radius:var(--radius-pill); background:var(--teal-100); color:var(--teal-700); font-size:.62rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; }
+    .guest-card h3 { margin:0 0 .45rem; font-size:1rem; line-height:1.35; }
+    .guest-card p { margin:0; color:var(--muted); font-size:.78rem; line-height:1.55; }
+    .guest-card.featured { background:linear-gradient(145deg, #FFFDF8, #F6EFE5); border-top:3px solid var(--teal-600); }
+    .guest-card.featured::after { content:""; position:absolute; width:90px; height:90px; right:18px; top:18px; border-radius:50%; background:radial-gradient(circle, rgba(47,143,157,.12), transparent 68%); pointer-events:none; }
+    .guest-placeholder { display:flex; align-items:center; gap:.5rem; margin-top:1rem; color:var(--sand-500); font-size:.65rem; font-weight:700; }
+    .guest-placeholder span { width:7px; height:7px; border-radius:50%; background:var(--coral-500); }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(100, 116, 139, 1);
+    /* Participate */
+    .participate { background: var(--plum-800); color:var(--white); }
+    .participate .section-head h2 { color:var(--white); }
+    .participate .section-head p { color:#C9C0D1; }
+    .participation-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius-lg); overflow:hidden; }
+    .participation-card { padding:2rem; background:var(--plum-900); }
+    .participation-card.partner { background:var(--teal-700); }
+    .path-label { color:var(--teal-300); font-size:.65rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+    .partner .path-label { color:#D9FAF8; }
+    .participation-card h3 { margin:.5rem 0 .65rem; color:var(--white); font-family:var(--font-display); font-size:1.75rem; line-height:1.1; }
+    .participation-card p { max-width:520px; margin:0 0 1.5rem; color:#C9C0D1; font-size:.85rem; }
+    .partner p { color:rgba(255,255,255,.78); }
+
+    /* Contact */
+    .contact { background: var(--plum-950); color:var(--white); }
+    .contact-grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(3rem,7vw,7rem); align-items:start; }
+    .contact-copy h2 { margin:0 0 1rem; font-family:var(--font-display); font-size:var(--text-2xl); line-height:1.05; }
+    .contact-copy > p { max-width:560px; margin:0 0 2rem; color:#BDB5C7; }
+    .contact-facts { display:grid; gap:.8rem; }
+    .contact-fact { padding-top:.8rem; border-top:1px solid rgba(255,255,255,.10); }
+    .contact-fact small { display:block; margin-bottom:.2rem; color:#8D8498; font-size:.62rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; }
+    .contact-fact strong { color:#F4EFF7; font-size:.85rem; }
+    .form-card { padding:1.6rem; border:1px solid rgba(255,255,255,.12); border-radius:var(--radius-lg); background:rgba(255,255,255,.045); box-shadow:var(--shadow-lg); }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .field { display:grid; gap:.4rem; }
+    .field.full { grid-column:1 / -1; }
+    .field label { color:#E7E0EC; font-size:.74rem; font-weight:700; }
+    .required { color:var(--coral-500); }
+    .field input, .field select, .field textarea {
+      width:100%; min-height:46px; border:1px solid rgba(255,255,255,.14); border-radius:.65rem;
+      padding:.7rem .8rem; background:rgba(255,255,255,.055); color:var(--white); outline:none;
+      transition:border-color var(--transition), background var(--transition), box-shadow var(--transition);
     }
-  </style>
+    .field textarea { min-height:110px; resize:vertical; }
+    .field input::placeholder, .field textarea::placeholder { color:#8F8698; }
+    .field select option { color:var(--ink); background:var(--sand-50); }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--teal-300); box-shadow:0 0 0 3px rgba(105,199,197,.12); background:rgba(255,255,255,.07); }
+    .field [aria-invalid="true"] { border-color:var(--coral-500); }
+    .field-error { min-height:1em; color:#FFB3A5; font-size:.66rem; }
+    .form-footer { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-top:1rem; }
+    .form-note { color:#8F8698; font-size:.67rem; line-height:1.5; }
+    .form-status { min-height:22px; margin-top:.9rem; font-size:.75rem; }
+    .form-status.success { color:#8FE0D8; }
+    .form-status.error { color:#FFB3A5; }
+    .form-submit[disabled] { opacity:.65; cursor:wait; transform:none; }
+
+    /* Footer */
+    .footer { padding:2rem 0; background:var(--plum-950); border-top:1px solid rgba(255,255,255,.08); color:#8F8698; }
+    .footer-inner { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    .footer-brand { color:#EAE4EF; font-size:.78rem; font-weight:700; }
+    .footer-links { display:flex; flex-wrap:wrap; gap:.8rem 1rem; font-size:.7rem; }
+    .footer-links a:hover { color:var(--teal-300); }
+    .footer-note { margin-top:1rem; font-size:.65rem; }
+
+    /* Reveal */
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity 650ms ease, transform 650ms ease; }
+    .reveal.is-visible { opacity:1; transform:none; }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .hero-side { right:-4%; opacity:.62; }
+      .why-grid { gap:3.5rem; }
+    }
+    @media (max-width: 900px) {
+      :root { --space-9: 5rem; }
+      .hero { min-height:auto; padding-bottom:80px; }
+      .hero-side { display:none; }
+      .hero-meta { grid-template-columns:repeat(2, max-content); }
+      .why-grid, .contact-grid { grid-template-columns:1fr; }
+      .experience-grid { grid-template-columns:1fr; }
+      .experience-item { border-right:0; }
+      .experience-item:nth-last-child(-n+2) { border-bottom:1px solid rgba(255,255,255,.09); }
+      .experience-item:last-child { border-bottom:0; }
+      .guest-grid { grid-template-columns:repeat(2,1fr); }
+      .timeline::before { left:92px; }
+      .agenda-item { grid-template-columns:75px 24px 1fr; }
+      .participation-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width: 760px) {
+      :root { --nav-height:68px; --space-9:4.2rem; }
+      .wrap { width:min(var(--container), calc(100% - 30px)); }
+      .nav-links {
+        position:fixed; top:var(--nav-height); left:12px; right:12px; z-index:1001;
+        display:grid; gap:.25rem; padding:.6rem;
+        background:rgba(36,27,58,.98); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius-md);
+        box-shadow:var(--shadow-lg); opacity:0; visibility:hidden; transform:translateY(-8px); pointer-events:none;
+        transition:opacity var(--transition), transform var(--transition), visibility var(--transition);
+      }
+      .nav-links.is-open { opacity:1; visibility:visible; transform:none; pointer-events:auto; }
+      .nav-links a { min-height:48px; padding-inline:1rem; }
+      .nav-links .nav-cta { margin: .35rem 0 0; justify-content:center; }
+      .nav-toggle { display:grid; place-items:center; }
+      .aki-logo { width:62px; height:49px; }
+      .brand-divider { height:32px; }
+      .brand-copy strong { font-size:.78rem; }
+      .brand-copy span { display:none; }
+      .hero { padding-top:calc(var(--nav-height) + 72px); }
+      .hero h1 { font-size:clamp(3rem, 15vw, 5.3rem); }
+      .hero-meta { grid-template-columns:1fr 1fr; }
+      .meta-item { min-height:44px; border-radius:.7rem; }
+      .form-grid { grid-template-columns:1fr; }
+      .field.full { grid-column:auto; }
+      .guest-grid { grid-template-columns:1fr; }
+      .timeline::before { left:68px; }
+      .agenda-item { grid-template-columns:54px 24px 1fr; gap:.8rem; }
+      .agenda-time { font-size:.64rem; }
+      .footer-inner { align-items:flex-start; flex-direction:column; }
+    }
+    @media (max-width: 480px) {
+      .hero-meta { grid-template-columns:1fr; }
+      .hero-actions { display:grid; grid-template-columns:1fr; }
+      .btn { width:100%; }
+      .experience-item { grid-template-columns:36px 42px 1fr; gap:.65rem; padding:1.2rem; }
+      .experience-mark { display:none; }
+      .experience-item h3 { font-size:.96rem; }
+      .experience-item p { font-size:.76rem; }
+      .participation-card { padding:1.4rem; }
+      .form-card { padding:1.15rem; }
+      .form-footer { align-items:stretch; flex-direction:column; }
+      .form-footer .btn { width:100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto; }
+      *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+      .reveal { opacity:1; transform:none; }
+    }
+  /* FINAL EXPERIENCE CARD FIX */
+.experience-head{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(280px,.65fr);
+  gap:4rem;
+  align-items:end;
+  margin-bottom:3rem;
+}
+.experience-head h2{
+  max-width:760px;
+  color:var(--white);
+  font-family:var(--font-display);
+  font-size:clamp(2.35rem,4.6vw,4rem);
+  line-height:1.04;
+  letter-spacing:-.035em;
+  font-weight:500;
+}
+.experience-head h2 em{color:var(--teal-300);font-style:italic;}
+.experience-head p{margin:0;max-width:410px;color:#C9C0D1;font-size:.9rem;line-height:1.75;}
+.experience-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:1.25rem;
+  overflow:hidden;
+  background:rgba(255,255,255,.035);
+  box-shadow:0 28px 70px rgba(0,0,0,.16);
+}
+.experience-item{
+  min-width:0;
+  min-height:245px;
+  padding:1.7rem 1.75rem 1.8rem;
+  background:rgba(48,35,74,.62);
+  border-right:1px solid rgba(255,255,255,.09);
+  border-bottom:1px solid rgba(255,255,255,.09);
+  transition:background .25s ease;
+}
+.experience-item:nth-child(2n){border-right:0}
+.experience-item:nth-last-child(-n+2){border-bottom:0}
+.experience-item:hover{background:rgba(105,199,197,.065)}
+.experience-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:42px;
+  margin-bottom:1.15rem;
+}
+.experience-index{
+  color:var(--teal-300);
+  font-family:var(--font-display);
+  font-size:1.35rem;
+  line-height:1;
+  font-style:italic;
+}
+.experience-icon{
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border-radius:.75rem;
+  color:var(--teal-300);
+  background:rgba(105,199,197,.075);
+  border:1px solid rgba(105,199,197,.2);
+  font-size:1rem;
+}
+.experience-label{
+  margin-bottom:.42rem;
+  color:#8FB7B6;
+  font-size:.62rem;
+  font-weight:800;
+  letter-spacing:.15em;
+  line-height:1.2;
+  text-transform:uppercase;
+}
+.experience-item h3{
+  margin:0 0 .5rem;
+  color:var(--white);
+  font-size:1.15rem;
+  line-height:1.3;
+  letter-spacing:-.015em;
+}
+.experience-item p{margin:0;max-width:650px;color:#C0B7C8;font-size:.82rem;line-height:1.6;}
+@media(max-width:800px){
+  .experience-head{grid-template-columns:1fr;gap:1rem}
+  .experience-grid{grid-template-columns:1fr}
+  .experience-item,.experience-item:nth-child(2n),.experience-item:nth-last-child(-n+2){border-right:0;border-bottom:1px solid rgba(255,255,255,.09)}
+  .experience-item:last-child{border-bottom:0}
+}
+@media(max-width:560px){
+  .experience-head h2{font-size:2.2rem}
+  .experience-item{min-height:0;padding:1.35rem}
+}
+
+
+/* =========================================================
+   EXPERIENCE — DEFINITIVE LAYOUT RESET
+   ========================================================= */
+
+/* The card itself is a normal vertical editorial block. */
+.experience .experience-item{
+  display:block !important;
+  position:relative;
+  min-width:0;
+  width:auto;
+  min-height:255px;
+  padding:28px 32px 30px;
+  margin:0;
+  box-sizing:border-box;
+  border-right:1px solid rgba(255,255,255,.09);
+  border-bottom:1px solid rgba(255,255,255,.09);
+}
+
+/* Only the number + icon share a row. */
+.experience .experience-top{
+  display:flex !important;
+  width:100%;
+  min-height:44px;
+  margin:0 0 17px;
+  padding:0;
+  align-items:flex-start;
+  justify-content:space-between;
+  box-sizing:border-box;
+}
+
+.experience .experience-index{
+  display:block !important;
+  width:auto !important;
+  margin:0;
+  padding:0;
+  color:#69C7C5;
+  font-family:"Fraunces",Georgia,serif;
+  font-size:25px;
+  line-height:1;
+  font-style:italic;
+}
+
+.experience .experience-icon{
+  display:grid !important;
+  flex:0 0 44px;
+  width:44px;
+  height:44px;
+  margin:0;
+  padding:0;
+  place-items:center;
+  box-sizing:border-box;
+}
+
+/* Text always occupies the full card width. */
+.experience .experience-label,
+.experience .experience-item h3,
+.experience .experience-item p{
+  display:block !important;
+  width:100% !important;
+  max-width:720px;
+  float:none;
+  clear:both;
+  box-sizing:border-box;
+}
+
+.experience .experience-label{
+  margin:0 0 7px;
+  color:#8FB7B6;
+  font-size:9px;
+  line-height:1.25;
+  font-weight:800;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+.experience .experience-item h3{
+  margin:0 0 9px;
+  color:#FFFDF8;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:21px;
+  line-height:1.25;
+  font-weight:750;
+  letter-spacing:-.02em;
+}
+
+.experience .experience-item p{
+  margin:0;
+  color:#C0B7C8;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:13px;
+  line-height:1.62;
+}
+
+/* No hidden/legacy number on the right. */
+.experience .experience-mark,
+.experience .experience-item::after,
+.experience .experience-item::before{
+  display:none !important;
+  content:none !important;
+}
+
+/* Grid separators */
+.experience .experience-item:nth-child(2n){
+  border-right:0;
+}
+
+.experience .experience-item:nth-child(n+5){
+  border-bottom:0;
+}
+
+@media(max-width:900px){
+  .experience .experience-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  .experience .experience-item,
+  .experience .experience-item:nth-child(2n),
+  .experience .experience-item:nth-child(n+5){
+    border-right:0;
+    border-bottom:1px solid rgba(255,255,255,.09);
+  }
+
+  .experience .experience-item:last-child{
+    border-bottom:0;
+  }
+}
+
+@media(max-width:600px){
+  .experience .experience-item{
+    min-height:0;
+    padding:24px 21px 26px;
+  }
+
+  .experience .experience-item h3{
+    font-size:18px;
+  }
+
+  .experience .experience-item p{
+    font-size:12px;
+  }
+}
+
+
+    /* AKI identity: transparent institutional logo supplied by the organiser. */
+</style>
 </head>
 
-<body class="antialiased overflow-x-hidden">
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
 
-  <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-    <div class="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-teal-600/20 rounded-full blur-[120px]"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full blur-[120px]"></div>
-    <div class="absolute top-[40%] left-[40%] w-[30%] h-[30%] bg-purple-600/10 rounded-full blur-[100px]"></div>
-  </div>
+  <header class="site-nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="EduAKI Tech X 2030 home">
+        <img class="aki-logo" src="./logo-aki.png" alt="AKI Group of Institutions logo">
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <strong>EduAKI Tech X <b>2030</b></strong>
+          <span>Education + Technology Summit</span>
+        </span>
+      </a>
 
-  <header
-    class="sticky top-0 z-50 glass-panel border-b border-white/10 px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
-    <div>
-      <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-1">Aki International School</div>
-      <h1 class="text-2xl font-display font-bold text-white tracking-tight">Chapter 5: <span
-          class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-400">The Fundamental Unit of
-          Life</span></h1>
-      <p class="text-sm text-slate-400 mt-1">Interactive Cell Lab — Click, toggle, and step through to learn visually.
-      </p>
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#guests">Guests</a>
+        <a href="#participate">Participate</a>
+        <a class="nav-cta" href="#participate">Request an Invite</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path class="icon-menu" d="M4 7h16M4 12h16M4 17h16"/>
+          <path class="icon-close" d="M6 6l12 12M18 6 6 18" hidden/>
+        </svg>
+      </button>
     </div>
   </header>
 
-  <nav class="px-6 py-4 overflow-x-auto whitespace-nowrap hide-scrollbar border-b border-white/5">
-    <div class="flex gap-2 inline-flex bg-slate-900/50 p-1.5 rounded-xl border border-white/5">
-      <button
-        class="tab-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white ui-active:bg-slate-800 ui-active:text-white ui-active:shadow-md"
-        data-tab="timeline">Timeline</button>
-      <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white"
-        data-tab="transport">Membrane</button>
-      <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white"
-        data-tab="wall">Cell Wall</button>
-      <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white"
-        data-tab="nucleus">Nucleus</button>
-      <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white"
-        data-tab="proeuk">Diversity</button>
-      <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white"
-        data-tab="organelles">Organelles</button>
-      <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white"
-        data-tab="label">Label Lab</button>
-      <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white"
-        data-tab="division">Division</button>
-      <button
-        class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white bg-teal-500/10 text-teal-300 border border-teal-500/20"
-        data-tab="pro-labs">Pro Labs ✨</button>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero-inner">
+        <div class="hero-lockup">A new school-hosted summit · Bengaluru</div>
+        <h1 id="hero-title">Are we preparing today's children for the world of <em>2030</em>?</h1>
+        <p class="hero-sub">EduAKI Tech X 2030 brings educators, school leaders, technologists, students and parents onto one stage to answer that question — together.</p>
+
+        <div class="hero-meta" aria-label="Event details">
+          <div class="meta-item">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 3v4M17 3v4M4 9h16M5 5h14a1 1 0 0 1 1 1v13H4V6a1 1 0 0 1 1-1Z"/></svg>
+            Date coming soon
+          </div>
+          <div class="meta-item">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>
+            Venue coming soon
+          </div>
+          <div class="meta-item">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>
+            One-day flagship summit
+          </div>
+          <div class="meta-item">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 20h14M7 17V8l5-4 5 4v9M9 17v-4h6v4"/></svg>
+            Bengaluru, Karnataka
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#participate">Request an Invite <span aria-hidden="true">→</span></a>
+          <a class="btn btn-secondary" href="#experience">Explore the Summit <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+
+      <div class="hero-side" aria-hidden="true">
+        <div class="orbit"></div><div class="orbit"></div><div class="orbit"></div>
+        <div class="orbit-dot dot-a"></div><div class="orbit-dot dot-b"></div><div class="orbit-dot dot-c"></div>
+        <div class="orbit-core"><div><strong>30</strong><span>The classroom of tomorrow</span></div></div>
+      </div>
+    </section>
+
+    <section class="theme-band" aria-labelledby="theme-title">
+      <div class="wrap">
+        <div class="theme-label" id="theme-title">Central Theme</div>
+        <div class="theme-quote">“The future of education starts now — <strong>Technology</strong>, <strong>Ideas</strong>, <strong>Education</strong> and <strong>Transformation</strong>, brought together on one platform by AKI Group of Institutions.”</div>
+      </div>
+    </section>
+
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Why This Summit</span>
+          <h2 id="about-title">Education is changing faster than our classrooms are.</h2>
+        </div>
+        <div class="why-grid">
+          <div class="why-copy reveal">
+            <p>AI, automation and shifting job markets are redefining what young people will need to thrive by 2030 — and most schools are being asked to prepare for that future without a shared platform to think it through.</p>
+            <p>EduAKI Tech X 2030 is AKI Group of Institutions' answer to that gap: a forward-looking summit dedicated to exploring how education transforms through artificial intelligence, emerging technology, future skills, leadership and values-based learning.</p>
+            <p>It is built as a genuine dialogue, not a lecture series — distinguished educationists, school leaders, technology experts, industry voices, parents and young learners sit on the same platform to deliberate on what today's students actually need.</p>
+          </div>
+
+          <div class="focus-list reveal" aria-label="Summit focus areas">
+            <div class="focus-item"><span class="focus-number">01</span><div><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v4M5.6 5.6l2.8 2.8M3 12h4M5.6 18.4l2.8-2.8M12 21v-4M18.4 18.4l-2.8-2.8M21 12h-4M18.4 5.6l-2.8 2.8"/><circle cx="12" cy="12" r="4"/></svg><h3>Artificial Intelligence &amp; the Future of Education</h3><p>How AI reshapes teaching, learning and school leadership.</p></div></div>
+            <div class="focus-item"><span class="focus-number">02</span><div><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 18 18 4M11 4h7v7M4 20h16"/></svg><h3>Future Skills &amp; Employability</h3><p>The competencies students will actually need for 2030's workforce.</p></div></div>
+            <div class="focus-item"><span class="focus-number">03</span><div><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></svg><h3>Technology-Enabled Teaching &amp; Learning</h3><p>Practical, classroom-ready approaches to digital learning.</p></div></div>
+            <div class="focus-item"><span class="focus-number">04</span><div><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 20a7 7 0 0 1 14 0M4 12h3M17 12h3"/></svg><h3>The Teacher of the Future</h3><p>Redefining the educator's role in an AI-assisted classroom.</p></div></div>
+            <div class="focus-item"><span class="focus-number">05</span><div><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3 4 8l8 5 8-5-8-5Z"/><path d="m7 11-3 2 8 5 8-5-3-2M7 15l-3 2 8 4 8-4-3-2"/></svg><h3>Student Leadership, Innovation &amp; Entrepreneurship</h3><p>Giving young voices a real seat at the table.</p></div></div>
+            <div class="focus-item"><span class="focus-number">06</span><div><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.3 8 10 4.6-1.7 8-5 8-10V6l-8-3Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg><h3>Values, Character &amp; Responsible Technology</h3><p>Grounding innovation in character and purpose.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section experience" id="experience" aria-labelledby="experience-title">
+  <div class="wrap">
+    <div class="section-head experience-head reveal">
+      <div>
+        <span class="eyebrow">Experience 2030</span>
+        <h2 id="experience-title">Where the future of education becomes <em>something you can experience.</em></h2>
+      </div>
     </div>
-  </nav>
 
-  <main class="max-w-6xl mx-auto px-6 py-8">
+    <div class="experience-grid reveal">
+      <article class="experience-item">
+        <div class="experience-top"><span class="experience-index">01</span><span class="experience-icon" aria-hidden="true">✦</span></div>
+        <div class="experience-label">Student Innovation</div>
+        <h3>AI Experience Zone</h3>
+        <p>Students demonstrate AI projects and explore how artificial intelligence can support learning, creativity and problem-solving.</p>
+      </article>
+      <article class="experience-item">
+        <div class="experience-top"><span class="experience-index">02</span><span class="experience-icon" aria-hidden="true">▦</span></div>
+        <div class="experience-label">Future Classroom</div>
+        <h3>Classroom 2030</h3>
+        <p>Visitors step into a futuristic classroom and experience how learning could happen in 2030.</p>
+      </article>
+      <article class="experience-item">
+        <div class="experience-top"><span class="experience-index">03</span><span class="experience-icon" aria-hidden="true">◇</span></div>
+        <div class="experience-label">Student Voice</div>
+        <h3>Career Wall 2030</h3>
+        <p>Students imagine the jobs and opportunities that may exist in 2030 that do not exist today.</p>
+      </article>
+      <article class="experience-item">
+        <div class="experience-top"><span class="experience-index">04</span><span class="experience-icon" aria-hidden="true">✎</span></div>
+        <div class="experience-label">Idea Stage</div>
+        <h3>Two Minutes. One Idea.</h3>
+        <p>Students get two minutes to present an idea that could improve education.</p>
+      </article>
+      <article class="experience-item">
+        <div class="experience-top"><span class="experience-index">05</span><span class="experience-icon" aria-hidden="true">♧</span></div>
+        <div class="experience-label">Teacher Innovation</div>
+        <h3>Teacher Innovation Lab</h3>
+        <p>Teachers demonstrate one creative teaching method and show how the classroom can work differently.</p>
+      </article>
+      <article class="experience-item">
+        <div class="experience-top"><span class="experience-index">06</span><span class="experience-icon" aria-hidden="true">♡</span></div>
+        <div class="experience-label">Parent Future Talk</div>
+        <h3>Beyond the Textbook</h3>
+        <p>Parents explore what children need to learn from life, family and experience that textbooks cannot teach.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-    <!-- ============ TIMELINE ============ -->
-    <section class="panel active glass-panel rounded-2xl p-6 md:p-8" id="panel-timeline">
-      <h2 class="text-xl md:text-2xl font-display font-bold text-white mb-2">Discovery of the Cell & Cell Theory</h2>
-      <p class="text-slate-400 text-sm mb-8">Click a year to see what that scientist discovered.</p>
-
-      <div class="flex overflow-x-auto pb-6 mb-6 gap-0 hide-scrollbar" id="tlTrack"></div>
-      <div id="tlCard" class="bg-slate-900/60 border border-white/10 rounded-xl p-6"></div>
-    </section>
-
-    <!-- ============ MEMBRANE ============ -->
-    <section class="panel glass-panel rounded-2xl p-6 md:p-8" id="panel-transport">
-      <h2 class="text-xl md:text-2xl font-display font-bold text-white mb-2">Plasma Membrane: Moving Materials</h2>
-      <p class="text-slate-400 text-sm mb-6">Three ways materials cross the selectively permeable membrane.</p>
-
-      <div class="flex flex-wrap gap-2 mb-6">
-        <button
-          class="opt-btn mt-mode-btn active px-4 py-2 rounded-lg text-sm font-medium bg-slate-800 text-white border border-white/10 hover:bg-slate-700 transition-colors"
-          data-mt="diffusion">Diffusion</button>
-        <button
-          class="opt-btn mt-mode-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-800/50 text-slate-400 border border-white/5 hover:bg-slate-800 transition-colors"
-          data-mt="osmosis">Osmosis</button>
-        <button
-          class="opt-btn mt-mode-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-800/50 text-slate-400 border border-white/5 hover:bg-slate-800 transition-colors"
-          data-mt="endocytosis">Endocytosis</button>
-      </div>
-
-      <div
-        class="bg-slate-900/50 border border-white/10 rounded-xl p-8 min-h-[280px] flex items-center justify-center relative overflow-hidden"
-        id="mtFrame"></div>
-
-      <div class="mt-6 text-center">
-        <h3 class="text-lg font-display font-bold text-white" id="mtTitle"></h3>
-        <p class="text-slate-300 text-sm mt-2 max-w-2xl mx-auto leading-relaxed" id="mtDesc"></p>
-      </div>
-      <div class="flex justify-center gap-3 mt-6" id="mtControls"></div>
-    </section>
-
-    <!-- ============ CELL WALL ============ -->
-    <section class="panel glass-panel rounded-2xl p-6 md:p-8" id="panel-wall">
-      <h2 class="text-xl md:text-2xl font-display font-bold text-white mb-2">Cell Wall & Plasmolysis</h2>
-      <p class="text-slate-400 text-sm mb-6">Only plants, fungi and bacteria have this rigid outer layer.</p>
-
-      <div class="flex flex-wrap gap-2 mb-6">
-        <button
-          class="opt-btn wall-mode-btn active px-4 py-2 rounded-lg text-sm font-medium bg-slate-800 text-white border border-white/10 hover:bg-slate-700 transition-colors"
-          data-wall="normal">Normal (Turgid)</button>
-        <button
-          class="opt-btn wall-mode-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-800/50 text-slate-400 border border-white/5 hover:bg-slate-800 transition-colors"
-          data-wall="plasmolysed">Plasmolysed (Salt Water)</button>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        <div
-          class="bg-slate-900/50 border border-white/10 rounded-xl p-8 min-h-[300px] flex items-center justify-center">
-          <div class="wall-frame">
-            <div class="wall-inner" id="wallInner"></div>
-          </div>
+<section class="section agenda" id="agenda" aria-labelledby="agenda-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Proposed Program</span>
+          <h2 id="agenda-title">A one-day flagship dialogue.</h2>
+          <p>From opening ceremony to closing declaration — a full day built around conversation, not just presentation.</p>
         </div>
-        <div class="text-center bg-slate-900/50 border border-white/10 rounded-xl p-4" id="wallRealImgContainer"></div>
-      </div>
-
-      <div class="mt-6 text-center">
-        <h3 class="text-lg font-display font-bold text-white" id="wallTitle"></h3>
-        <p class="text-slate-300 text-sm mt-2 max-w-2xl mx-auto leading-relaxed" id="wallDesc"></p>
-      </div>
-    </section>
-
-    <!-- ============ NUCLEUS ============ -->
-    <section class="panel glass-panel rounded-2xl p-6 md:p-8" id="panel-nucleus">
-      <h2 class="text-xl md:text-2xl font-display font-bold text-white mb-2">Nucleus & DNA</h2>
-      <p class="text-slate-400 text-sm mb-6">Step through to see how DNA organizes itself.</p>
-
-      <div class="bg-slate-900/50 border border-white/10 rounded-xl p-8 min-h-[250px] flex items-center justify-center"
-        id="nucStage"></div>
-
-      <div class="mt-6 text-center">
-        <h3 class="text-lg font-display font-bold text-white" id="nucTitle"></h3>
-        <p class="text-slate-300 text-sm mt-2 max-w-2xl mx-auto leading-relaxed" id="nucDesc"></p>
-      </div>
-
-      <div class="flex justify-center gap-3 mt-6">
-        <button
-          class="px-5 py-2.5 rounded-lg text-sm font-semibold bg-transparent text-slate-400 border border-slate-600 hover:text-white hover:border-slate-400 transition-colors disabled:opacity-30"
-          id="nucPrev">◀ Back</button>
-        <button
-          class="px-5 py-2.5 rounded-lg text-sm font-semibold bg-white text-slate-900 hover:bg-slate-200 transition-colors disabled:opacity-30"
-          id="nucNext">Next ▶</button>
-      </div>
-      <div class="flex justify-center gap-2 mt-4" id="nucDots"></div>
-    </section>
-
-    <!-- ============ PROKARYOTE / EUKARYOTE ============ -->
-    <section class="panel glass-panel rounded-2xl p-6 md:p-8" id="panel-proeuk">
-      <h2 class="text-xl md:text-2xl font-display font-bold text-white mb-2">Cell Diversity</h2>
-      <p class="text-slate-400 text-sm mb-6">Compare the two fundamental types of cells.</p>
-
-      <div class="flex flex-wrap gap-2 mb-6">
-        <button
-          class="opt-btn pe-mode-btn active px-4 py-2 rounded-lg text-sm font-medium bg-slate-800 text-white border border-white/10 hover:bg-slate-700"
-          data-pe="pro">Prokaryote (e.g. Bacteria)</button>
-        <button
-          class="opt-btn pe-mode-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-800/50 text-slate-400 border border-white/5 hover:bg-slate-800"
-          data-pe="euk">Eukaryote (Plant/Animal)</button>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-        <div
-          class="bg-slate-900/50 border border-white/10 rounded-xl p-8 min-h-[300px] flex items-center justify-center relative overflow-hidden"
-          id="peDiagram"></div>
-        <div class="bg-slate-900/50 border border-white/10 rounded-xl p-6 h-full flex flex-col" id="peFacts"></div>
+        <div class="timeline reveal">
+          <div class="agenda-item"><div class="agenda-time">08:30 – 09:30</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Networking</span><h3>Registration, Welcome Tea &amp; Networking</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">09:30 – 09:45</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Opening</span><h3>Opening Ceremony &amp; Welcome Address</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">09:45 – 10:00</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Ceremony</span><h3>Lighting of the Lamp / Ceremonial Opening</h3></div></div>
+          <div class="agenda-item keynote"><div class="agenda-time">10:00 – 10:30</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Keynote</span><h3>Inaugural Keynote — The Future of Education by 2030</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">10:30 – 11:15</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Panel</span><h3>Leadership Panel: AI, Technology &amp; the Future Classroom</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">11:15 – 11:35</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Networking</span><h3>Tea / Networking / Innovation Exhibition</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">11:35 – 12:20</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Expert Session</span><h3>AI-Powered Teaching &amp; Responsible Innovation</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">12:20 – 13:00</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Young Leaders</span><h3>Young Leaders Panel: What Students Need for 2030</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">13:00 – 14:00</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Lunch + Expo</span><h3>Lunch &amp; Education Innovation Expo</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">14:00 – 14:45</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Workshop</span><h3>Future Skills, Communication &amp; Entrepreneurship</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">14:45 – 15:30</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Roundtable</span><h3>School Leadership Roundtable</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">15:30 – 16:00</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Showcase</span><h3>Student Innovation Showcase</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">16:00 – 16:20</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Recognition</span><h3>Education Excellence Recognition</h3></div></div>
+          <div class="agenda-item keynote"><div class="agenda-time">16:20 – 16:40</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Declaration</span><h3>EduAKI Tech X 2030 Declaration</h3></div></div>
+          <div class="agenda-item"><div class="agenda-time">16:40 – 17:00</div><div class="agenda-node"></div><div class="agenda-content"><span class="session-type">Closing</span><h3>Vote of Thanks &amp; Closing</h3></div></div>
+        </div>
       </div>
     </section>
 
-    <!-- ============ ORGANELLES ============ -->
-    <section class="panel glass-panel rounded-2xl p-6 md:p-8" id="panel-organelles">
-      <h2 class="text-xl md:text-2xl font-display font-bold text-white mb-2">Organelle Explorer</h2>
-      <p class="text-slate-400 text-sm mb-6">Click any organelle to read its job in the cell.</p>
-
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6" id="ogGrid"></div>
-      <div class="bg-slate-900/60 border border-white/10 rounded-xl p-6" id="ogDetail"></div>
+    <section class="section guests" id="guests" aria-labelledby="guests-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Who's In The Room</span>
+          <h2 id="guests-title">Distinguished guests, across every part of the education ecosystem.</h2>
+        </div>
+        <div class="guest-grid reveal">
+          <article class="guest-card featured"><span class="guest-tier">Tier 1 · Featured</span><h3>Chief Guest &amp; Guest of Honour</h3><p>Senior public leader, education authority or distinguished national-level educationist.</p><div class="guest-placeholder"><span></span> Guest to be announced</div></article>
+          <article class="guest-card featured"><span class="guest-tier">Tier 2 · Featured</span><h3>Keynote Speaker</h3><p>Visionary educationist, technology leader or futurist setting the tone for the day.</p><div class="guest-placeholder"><span></span> Speaker to be announced</div></article>
+          <article class="guest-card"><span class="guest-tier">Tier 2</span><h3>AI &amp; EdTech Expert</h3><p>Practical insight on AI, digital learning and responsible use of technology in classrooms.</p><div class="guest-placeholder"><span></span> Expert to be announced</div></article>
+          <article class="guest-card"><span class="guest-tier">Tier 2 / 3</span><h3>School Leadership Guest</h3><p>Founders, CEOs, principals and academic leaders from across the education sector.</p><div class="guest-placeholder"><span></span> Guest to be announced</div></article>
+          <article class="guest-card"><span class="guest-tier">Tier 3</span><h3>Industry Guest</h3><p>Entrepreneurs and business leaders focused on future skills and employability.</p><div class="guest-placeholder"><span></span> Guest to be announced</div></article>
+          <article class="guest-card"><span class="guest-tier">Tier 3</span><h3>Student Voice</h3><p>Young innovators, student leaders and youth entrepreneurs speaking for themselves.</p><div class="guest-placeholder"><span></span> Participants to be announced</div></article>
+          <article class="guest-card"><span class="guest-tier">Tier 3</span><h3>Parent &amp; Community Voice</h3><p>Advocates for stronger school–family partnerships in a changing education landscape.</p><div class="guest-placeholder"><span></span> Guests to be announced</div></article>
+          <article class="guest-card"><span class="guest-tier">Special</span><h3>Universities, NGOs &amp; Organisations</h3><p>Institutional partners extending the summit's reach beyond a single school or sector.</p><div class="guest-placeholder"><span></span> Organisations to be announced</div></article>
+          <article class="guest-card"><span class="guest-tier">Special</span><h3>Media &amp; Community Guests</h3><p>Covering and amplifying the summit's declaration and outcomes beyond the venue.</p><div class="guest-placeholder"><span></span> Guests to be announced</div></article>
+        </div>
+      </div>
     </section>
 
-    <!-- ============ LABEL THE CELL ============ -->
-    <section class="panel glass-panel rounded-2xl p-6 md:p-8" id="panel-label">
-      <h2 class="text-xl md:text-2xl font-display font-bold text-white mb-2">Label the Cell (Textbook Diagrams)</h2>
-      <p class="text-slate-400 text-sm mb-6">Match the names to the exact NCERT textbook diagrams.</p>
-
-      <div class="flex flex-wrap gap-2 mb-6">
-        <button
-          class="opt-btn cell-mode-btn active px-4 py-2 rounded-lg text-sm font-medium bg-slate-800 text-white border border-white/10 hover:bg-slate-700"
-          data-cell="plant">Plant Cell</button>
-        <button
-          class="opt-btn cell-mode-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-800/50 text-slate-400 border border-white/5 hover:bg-slate-800"
-          data-cell="animal">Animal Cell</button>
+    <section class="section participate" id="participate" aria-labelledby="participate-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Participate</span>
+          <h2 id="participate-title">Choose how you want to be part of the conversation.</h2>
+        </div>
+        <div class="participation-grid reveal">
+          <article class="participation-card">
+            <div class="path-label">Attend</div>
+            <h3>Request an Invite</h3>
+            <p>Join as an educator, principal, parent or student and take part in panels, the roundtable and the innovation expo — a full day of conversation with people shaping education's next decade.</p>
+            <a class="btn btn-primary" href="#invite-form">Request an Invite <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="participation-card partner">
+            <div class="path-label">Speak / Partner</div>
+            <h3>Apply as Speaker</h3>
+            <p>Be considered as a keynote speaker, panelist or expert, or connect as a technology or institutional partner.</p>
+            <a class="btn btn-secondary" href="#invite-form">Apply as Speaker <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8 items-start">
-        <div id="imageWrapper" class="relative mx-auto overflow-hidden rounded-xl shadow-lg border border-white/10 self-start"
-          style="display:inline-block; width:100%; max-width:720px; vertical-align:top;">
-          <!-- The image defines the wrapper height naturally, and the overlay matches it exactly. -->
-          <img id="lcImage" src="cell-step7.jpg" alt="Plant or animal cell diagram"
-            class="block w-full h-auto rounded-lg select-none pointer-events-none">
-
-          <!-- Markers are positioned relative to the rendered diagram bounds. -->
-          <div id="lcDiagram" class="absolute inset-0 w-full h-full pointer-events-none">
-            <!-- Markers injected here via JS -->
+    <section class="section contact" id="invite-form" aria-labelledby="contact-title">
+      <div class="wrap contact-grid">
+        <div class="contact-copy reveal">
+          <span class="eyebrow">Get In Touch</span>
+          <h2 id="contact-title">Request an invite, or apply as a speaker.</h2>
+          <p>Tell us who you are and how you'd like to be involved — as an attendee, speaker or partner institution. Our organising committee will follow up with full details as the date is confirmed.</p>
+          <div class="contact-facts">
+            <div class="contact-fact"><small>Organised by</small><strong>AKI Group of Institutions</strong></div>
+            <div class="contact-fact"><small>City</small><strong>Bengaluru, Karnataka</strong></div>
+            <div class="contact-fact"><small>Status</small><strong>Coming soon · Date &amp; venue to be announced</strong></div>
           </div>
         </div>
 
-        <div class="flex flex-col gap-4">
-          <div class="flex flex-wrap gap-2" id="wordbank"></div>
-          <ul class="flex flex-col gap-2 m-0 p-0" id="blanks"></ul>
-
-          <div class="flex gap-3 mt-4">
-            <button
-              class="px-5 py-2.5 rounded-lg text-sm font-semibold bg-white text-slate-900 hover:bg-slate-200 transition-colors flex-1"
-              id="checkBtn">Check Answers</button>
-            <button
-              class="px-5 py-2.5 rounded-lg text-sm font-semibold bg-transparent text-slate-400 border border-slate-600 hover:text-white hover:border-slate-400 transition-colors"
-              id="resetBtn">Reset</button>
+        <form class="form-card reveal" id="inviteFormElement" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="fullName">Full Name <span class="required" aria-hidden="true">*</span></label>
+              <input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="Your full name" required aria-describedby="fullNameError">
+              <div class="field-error" id="fullNameError" aria-live="polite"></div>
+            </div>
+            <div class="field">
+              <label for="organisation">Organisation / School <span class="required" aria-hidden="true">*</span></label>
+              <input id="organisation" name="organisation" type="text" autocomplete="organization" placeholder="Your school or organisation" required aria-describedby="organisationError">
+              <div class="field-error" id="organisationError" aria-live="polite"></div>
+            </div>
+            <div class="field">
+              <label for="role">Role <span class="required" aria-hidden="true">*</span></label>
+              <select id="role" name="role" autocomplete="organization-title" required aria-describedby="roleError">
+                <option value="">Select your role</option>
+                <option>Educator / Teacher</option>
+                <option>Principal / School Leader</option>
+                <option>Speaker / Keynote / Panelist</option>
+                <option>Student</option>
+                <option>Parent</option>
+                <option>Industry / Technology Partner</option>
+                <option>Media</option>
+              </select>
+              <div class="field-error" id="roleError" aria-live="polite"></div>
+            </div>
+            <div class="field">
+              <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required aria-describedby="emailError">
+              <div class="field-error" id="emailError" aria-live="polite"></div>
+            </div>
+            <div class="field full">
+              <label for="message">Message <span style="color:#8F8698;font-weight:500">(optional)</span></label>
+              <textarea id="message" name="message" autocomplete="off" placeholder="Anything you'd like the organising committee to know" aria-describedby="messageError"></textarea>
+              <div class="field-error" id="messageError" aria-live="polite"></div>
+            </div>
           </div>
-          <div id="lcFeedback" class="text-sm font-bold text-center mt-2 h-6"></div>
-        </div>
-      </div>
-
-      <div class="mt-8 grid grid-cols-3 gap-[1px] bg-white/10 rounded-xl overflow-hidden text-sm">
-        <div class="bg-slate-800/80 p-3 font-semibold text-slate-300">Feature</div>
-        <div class="bg-slate-800/80 p-3 font-semibold text-slate-300">Plant Cell</div>
-        <div class="bg-slate-800/80 p-3 font-semibold text-slate-300">Animal Cell</div>
-        <div class="bg-slate-900/80 p-3 text-slate-400">Cell Wall</div>
-        <div class="bg-slate-900/80 p-3 text-slate-400">Present (cellulose)</div>
-        <div class="bg-slate-900/80 p-3 text-slate-400">Absent</div>
-        <div class="bg-slate-900/80 p-3 text-slate-400">Plastids (Chloroplasts)</div>
-        <div class="bg-slate-900/80 p-3 text-slate-400">Present</div>
-        <div class="bg-slate-900/80 p-3 text-slate-400">Absent</div>
-        <div class="bg-slate-900/80 p-3 text-slate-400">Vacuole</div>
-        <div class="bg-slate-900/80 p-3 text-slate-400">One large central</div>
-        <div class="bg-slate-900/80 p-3 text-slate-400">Small, temporary</div>
+          <div class="form-footer">
+            <button class="btn btn-teal form-submit" id="formSubmit" type="submit">Request an Invite</button>
+          </div>
+          <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+        </form>
       </div>
     </section>
-
-    <!-- ============ CELL DIVISION ============ -->
-    <section class="panel glass-panel rounded-2xl p-6 md:p-8" id="panel-division">
-      <h2 class="text-xl md:text-2xl font-display font-bold text-white mb-2">Cell Division</h2>
-      <p class="text-slate-400 text-sm mb-6">Watch how cells copy and divide.</p>
-
-      <div class="flex flex-wrap gap-2 mb-6">
-        <button
-          class="opt-btn div-mode-btn active px-4 py-2 rounded-lg text-sm font-medium bg-slate-800 text-white border border-white/10 hover:bg-slate-700"
-          data-mode="mitosis">Mitosis (Growth)</button>
-        <button
-          class="opt-btn div-mode-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-800/50 text-slate-400 border border-white/5 hover:bg-slate-800"
-          data-mode="meiosis">Meiosis (Reproduction)</button>
-      </div>
-
-      <div class="bg-slate-900/50 border border-white/10 rounded-xl p-8 min-h-[250px] flex items-center justify-center">
-        <div class="flex gap-6 items-center justify-center flex-wrap" id="stageRow"></div>
-      </div>
-
-      <div class="mt-6 text-center">
-        <h3 class="text-lg font-display font-bold text-white" id="stageTitle"></h3>
-        <p class="text-slate-300 text-sm mt-2 max-w-2xl mx-auto leading-relaxed" id="stageDesc"></p>
-        <div class="flex gap-3 justify-center mt-4">
-          <span class="font-mono text-xs bg-slate-800 border border-white/10 px-3 py-1.5 rounded-full text-amber-400"
-            id="badgeCells"></span>
-          <span class="font-mono text-xs bg-slate-800 border border-white/10 px-3 py-1.5 rounded-full text-amber-400"
-            id="badgeChroms"></span>
-        </div>
-      </div>
-
-      <div class="flex justify-center gap-3 mt-6">
-        <button
-          class="px-5 py-2.5 rounded-lg text-sm font-semibold bg-transparent text-slate-400 border border-slate-600 hover:text-white hover:border-slate-400 transition-colors disabled:opacity-30"
-          id="prevStage">◀ Back</button>
-        <button
-          class="px-5 py-2.5 rounded-lg text-sm font-semibold bg-white text-slate-900 hover:bg-slate-200 transition-colors disabled:opacity-30"
-          id="nextStage">Next Stage ▶</button>
-      </div>
-      <div class="flex justify-center gap-2 mt-4" id="stepDots"></div>
-    </section>
-
-    <!-- ============ PRO LABS ============ -->
-    <section class="panel glass-panel rounded-2xl p-6 md:p-8" id="panel-pro-labs">
-      <div class="flex items-center gap-3 mb-2">
-        <h2 class="text-xl md:text-2xl font-display font-bold text-white">Pro Interactive Virtual Labs</h2>
-        <span
-          class="bg-teal-500/20 text-teal-300 text-xs px-2 py-1 rounded-md border border-teal-500/30">External</span>
-      </div>
-      <p class="text-slate-400 text-sm mb-8">Explore world-class, scientifically accurate interactive platforms from top
-        universities.</p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <div
-          class="bg-slate-900/60 border border-white/10 rounded-xl p-6 text-center flex flex-col items-center hover:border-teal-500/50 transition-colors">
-          <div class="w-full h-32 bg-slate-800 rounded-lg mb-4 flex items-center justify-center">
-            <h3 class="text-2xl font-display font-bold text-teal-400 m-0">Learn.Genetics</h3>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-2">Inside a Cell & Scale</h3>
-          <p class="text-slate-400 text-sm mb-6 flex-1">The University of Utah's famous interactive lab. Drag a slider
-            to zoom from a coffee bean down to a carbon atom, and explore the inside of a cell.</p>
-          <a href="https://learn.genetics.utah.edu/content/cells/" target="_blank"
-            class="w-full py-3 rounded-lg text-sm font-semibold bg-teal-500/10 text-teal-300 border border-teal-500/30 hover:bg-teal-500/20 transition-colors">Open
-            Learn.Genetics ↗</a>
-        </div>
-
-        <div
-          class="bg-slate-900/60 border border-white/10 rounded-xl p-6 text-center flex flex-col items-center hover:border-blue-500/50 transition-colors">
-          <div class="w-full h-32 bg-slate-800 rounded-lg mb-4 flex items-center justify-center">
-            <h3 class="text-2xl font-display font-bold text-blue-400 m-0">HHMI BioInteractive</h3>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-2">Click and Learn</h3>
-          <p class="text-slate-400 text-sm mb-6 flex-1">Stunning high-fidelity 3D biological models. Click through
-            different organelles to see realistic microscopy and detailed functions.</p>
-          <a href="https://www.biointeractive.org/classroom-resources/inside-cell" target="_blank"
-            class="w-full py-3 rounded-lg text-sm font-semibold bg-blue-500/10 text-blue-300 border border-blue-500/30 hover:bg-blue-500/20 transition-colors">Open
-            BioInteractive ↗</a>
-        </div>
-
-      </div>
-    </section>
-
   </main>
 
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>
+        <div class="footer-brand">EduAKI Tech X 2030 · AKI Group of Institutions</div>
+        <div class="footer-note">Technology × Ideas × Education × Transformation</div>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#guests">Guests</a>
+        <a href="#participate">Participate</a>
+        <a href="javascript:void(0)" aria-label="Privacy policy placeholder">Privacy</a>
+        <a href="javascript:void(0)" aria-label="Terms placeholder">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
   <script>
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Reset classes for styling
-        document.querySelectorAll('.tab-btn').forEach(b => {
-          b.classList.remove('active', 'bg-slate-800', 'text-white', 'shadow-md');
-          b.classList.add('text-slate-400');
-        });
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    (() => {
+      const body = document.body;
+      const nav = document.querySelector('.site-nav');
+      const navToggle = document.getElementById('navToggle');
+      const navLinks = document.getElementById('navLinks');
+      const menuIcon = navToggle?.querySelector('.icon-menu');
+      const closeIcon = navToggle?.querySelector('.icon-close');
+      const mobileQuery = window.matchMedia('(max-width: 760px)');
 
-        // Activate clicked
-        btn.classList.add('active', 'bg-slate-800', 'text-white', 'shadow-md');
-        btn.classList.remove('text-slate-400');
-        const targetId = 'panel-' + btn.dataset.tab;
-        document.getElementById(targetId).classList.add('active');
-      });
-    });
-
-    const TIMELINE = [
-      { yr: '1665', who: 'Robert Hooke', text: 'Looked at a thin slice of cork under a basic microscope and saw tiny box-like compartments, like a honeycomb. He named them "cells".', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/RobertHookeMicrographia1665.jpg', imgCap: 'NCERT Ref: Hooke\'s original drawing of cork cells.' },
-      { yr: '1674', who: 'Leeuwenhoek', text: 'Using an improved microscope, discovered free-living cells swimming in pond water.', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Van_Leeuwenhoek_microscope_diagram.svg', imgCap: 'Replica of Leeuwenhoek\'s simple microscope.' },
-      { yr: '1831', who: 'Robert Brown', text: 'Discovered the nucleus — a dense structure inside the cell — while studying plant cells.', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Onion_Cells_Under_the_Microscope.jpg', imgCap: 'NCERT Activity 5.1: Onion peel cells showing dark nuclei.' },
-      { yr: '1839', who: 'J. E. Purkinje', text: 'Coined the term "protoplasm" for the living fluid substance found inside a cell.' },
-      { yr: '1838-39', who: 'Schleiden & Schwann', text: 'Put forward the Cell Theory: all plants and animals are made of cells.' },
-      { yr: '1855', who: 'Rudolf Virchow', text: 'Extended the Cell Theory: all cells arise only from pre-existing cells.' },
-      { yr: '1940', who: 'Electron Microscope', text: 'Its invention let scientists see the detailed internal organelles for the first time.', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Electron_Microscope.jpg', imgCap: 'An early electron microscope.' },
-    ];
-    let tlIndex = 0;
-    function renderTimeline() {
-      const track = document.getElementById('tlTrack');
-      track.innerHTML = TIMELINE.map((t, i) => `
-      <button class="tl-node flex flex-col items-center flex-shrink-0 min-w-[100px] outline-none group ${i === tlIndex ? 'active' : ''}" data-i="${i}">
-        <span class="dot w-3 h-3 rounded-full bg-slate-700 border-2 border-slate-500 mb-2 group-hover:border-slate-300"></span>
-        <span class="yr font-mono text-xs text-slate-500 group-hover:text-slate-300">${t.yr}</span>
-      </button>
-      ${i < TIMELINE.length - 1 ? '<div class="h-0.5 bg-slate-800 flex-1 min-w-[30px] mt-1.5"></div>' : ''}
-    `).join('');
-
-      const cur = TIMELINE[tlIndex];
-      let imgHtml = cur.img ? `
-      <div class="mt-4 md:mt-0 text-center">
-        <img src="${cur.img}" alt="${cur.who}" class="rounded-lg border border-white/10 max-h-48 object-contain bg-black/30 mx-auto shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/320x180/121a2e/8b93a7?text=Image+Unavailable';">
-        <p class="text-xs text-slate-400 mt-2 italic">${cur.imgCap}</p>
-      </div>` : '';
-
-      document.getElementById('tlCard').innerHTML = `
-      <div class="${cur.img ? 'grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-6 items-center' : ''}">
-        <div>
-          <h3 class="text-xl font-display font-bold text-amber-400 mb-2">${cur.yr} — ${cur.who}</h3>
-          <p class="text-slate-300 leading-relaxed">${cur.text}</p>
-        </div>
-        ${imgHtml}
-      </div>`;
-
-      document.querySelectorAll('.tl-node').forEach(n => {
-        n.addEventListener('click', () => { tlIndex = parseInt(n.dataset.i); renderTimeline(); });
-      });
-    }
-    renderTimeline();
-
-    let mtMode = 'diffusion';
-    const mtFrame = document.getElementById('mtFrame');
-    const mtTitle = document.getElementById('mtTitle');
-    const mtDesc = document.getElementById('mtDesc');
-    const mtControls = document.getElementById('mtControls');
-
-    function buildDiffusion() {
-      mtFrame.innerHTML = `<div class="w-[320px] h-[160px] border-2 border-slate-700 rounded-xl relative" id="diffBox"><div class="absolute left-1/2 top-0 bottom-0 border-l-2 border-dashed border-slate-500"></div></div>`;
-      const box = document.getElementById('diffBox');
-      const dots = [];
-      for (let i = 0; i < 16; i++) {
-        const d = document.createElement('div');
-        d.className = 'particle';
-        d.style.left = (10 + Math.random() * 120) + 'px';
-        d.style.top = (10 + Math.random() * 130) + 'px';
-        box.appendChild(d);
-        dots.push(d);
+      function setMenu(open) {
+        if (!navToggle || !navLinks) return;
+        navLinks.classList.toggle('is-open', open);
+        body.classList.toggle('menu-open', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+        navToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+        if (menuIcon) menuIcon.hidden = open;
+        if (closeIcon) closeIcon.hidden = !open;
+        if (open) navLinks.querySelector('a')?.focus();
       }
-      mtTitle.textContent = 'Before diffusion';
-      mtDesc.innerHTML = 'Particles are crowded on the left side (high concentration).';
-      mtControls.innerHTML = `<button class="px-5 py-2.5 rounded-lg text-sm font-semibold bg-white text-slate-900 hover:bg-slate-200 transition-colors" id="diffGo">Start Diffusion ▶</button>`;
-      document.getElementById('diffGo').addEventListener('click', () => {
-        dots.forEach(d => { d.style.left = (10 + Math.random() * 290) + 'px'; });
-        mtTitle.textContent = 'After diffusion';
-        mtDesc.innerHTML = 'Particles spread evenly. <span class="block mt-2 text-teal-400 font-medium pt-2 border-t border-white/10">🌍 Real World: Oxygen entering your cells.</span>';
-      });
-    }
 
-    const OSMO_STATES = {
-      hypotonic: { cls: 'swollen', title: 'Hypotonic Solution', desc: 'Outside water is HIGHER → water rushes IN → cell swells. <span class="block mt-2 text-teal-400 font-medium pt-2 border-t border-white/10">🌍 Real World: A raisin swelling in a cup of plain water.</span>' },
-      isotonic: { cls: '', title: 'Isotonic Solution', desc: 'Water is EQUAL → no net movement → cell stays same size. <span class="block mt-2 text-teal-400 font-medium pt-2 border-t border-white/10">🌍 Real World: Hospital IV fluids matching your blood.</span>' },
-      hypertonic: { cls: 'shrunk', title: 'Hypertonic Solution', desc: 'Outside water is LOWER (salty/sugary) → water rushes OUT → cell shrinks. <span class="block mt-2 text-teal-400 font-medium pt-2 border-t border-white/10">🌍 Real World: Gargling salt water for a swollen throat.</span>' }
-    };
-    function buildOsmosis() {
-      mtFrame.innerHTML = `<div class="w-[200px] h-[200px] border-4 border-slate-600 border-t-0 rounded-b-2xl mx-auto flex items-center justify-center bg-blue-500/10 relative"><div class="absolute top-[-10px] w-full border-t-2 border-dashed border-blue-400/30"></div><div class="osmo-cell" id="osmoCell"></div></div>`;
-      mtControls.innerHTML = `
-      <button class="px-4 py-2 rounded-lg text-sm font-semibold bg-transparent border border-slate-600 text-slate-400 hover:text-white" data-o="hypotonic">Hypotonic</button>
-      <button class="px-4 py-2 rounded-lg text-sm font-semibold bg-transparent border border-slate-600 text-slate-400 hover:text-white" data-o="isotonic">Isotonic</button>
-      <button class="px-4 py-2 rounded-lg text-sm font-semibold bg-transparent border border-slate-600 text-slate-400 hover:text-white" data-o="hypertonic">Hypertonic</button>`;
-
-      function setOsmo(key) {
-        const s = OSMO_STATES[key];
-        document.getElementById('osmoCell').className = 'osmo-cell ' + s.cls;
-        mtTitle.textContent = s.title;
-        mtDesc.innerHTML = s.desc;
-      }
-      mtControls.querySelectorAll('[data-o]').forEach(b => b.addEventListener('click', () => setOsmo(b.dataset.o)));
-      setOsmo('hypotonic');
-    }
-
-    function buildEndocytosis() {
-      mtFrame.innerHTML = `<div class="w-[200px] h-[200px] border-4 border-teal-500 bg-teal-500/10 rounded-full relative flex items-center justify-center">
-        <div class="endo-vesicle" id="endoVes"></div>
-        <div class="w-4 h-4 bg-amber-400 rounded-full absolute transition-all duration-1000" id="endoParticle" style="left:-40px; top:90px;"></div>
-      </div>`;
-      mtTitle.textContent = 'Before engulfing';
-      mtDesc.innerHTML = 'A food particle sits outside the flexible cell membrane.';
-      mtControls.innerHTML = `<button class="px-5 py-2.5 rounded-lg text-sm font-semibold bg-white text-slate-900 hover:bg-slate-200 transition-colors" id="endoGo">Engulf Particle ▶</button>`;
-      document.getElementById('endoGo').addEventListener('click', () => {
-        document.getElementById('endoParticle').style.left = '92px';
-        document.getElementById('endoParticle').style.top = '92px';
-        document.getElementById('endoVes').classList.add('show');
-        mtTitle.textContent = 'After endocytosis';
-        mtDesc.innerHTML = 'The membrane wraps around the particle. <span class="block mt-2 text-teal-400 font-medium pt-2 border-t border-white/10">🌍 Real World: White blood cells "eating" bacteria.</span>';
-      });
-    }
-
-    function renderMT() {
-      if (mtMode === 'diffusion') buildDiffusion();
-      else if (mtMode === 'osmosis') buildOsmosis();
-      else buildEndocytosis();
-    }
-
-    document.querySelectorAll('.mt-mode-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.mt-mode-btn').forEach(b => { b.classList.remove('active', 'bg-slate-800', 'text-white'); b.classList.add('bg-slate-800/50', 'text-slate-400'); });
-        btn.classList.add('active', 'bg-slate-800', 'text-white'); btn.classList.remove('bg-slate-800/50', 'text-slate-400');
-        mtMode = btn.dataset.mt;
-        renderMT();
-      });
-    });
-    renderMT();
-
-    function setWall(state) {
-      const inner = document.getElementById('wallInner');
-      const imgContainer = document.getElementById('wallRealImgContainer');
-
-      document.querySelectorAll('.wall-mode-btn').forEach(b => {
-        if (b.dataset.wall === state) {
-          b.classList.add('active', 'bg-slate-800', 'text-white'); b.classList.remove('bg-slate-800/50', 'text-slate-400');
-        } else {
-          b.classList.remove('active', 'bg-slate-800', 'text-white'); b.classList.add('bg-slate-800/50', 'text-slate-400');
+      navToggle?.addEventListener('click', () => setMenu(!navLinks.classList.contains('is-open')));
+      navLinks?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && navLinks?.classList.contains('is-open')) {
+          setMenu(false);
+          navToggle?.focus();
         }
       });
-
-      if (state === 'normal') {
-        inner.className = 'wall-inner';
-        document.getElementById('wallTitle').textContent = 'Turgid (Normal State)';
-        document.getElementById('wallDesc').innerHTML = 'The rigid cell wall lets the plant take in water without bursting. <span class="block mt-2 text-teal-400 font-medium pt-2 border-t border-white/10">🌍 Real World: A healthy, watered houseplant stands straight up.</span>';
-        imgContainer.innerHTML = `<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Onion_Cells_Under_the_Microscope.jpg" alt="Turgid cells" class="rounded-lg shadow-lg mx-auto max-h-40 border border-white/10"><div class="text-xs text-slate-400 mt-2 italic">NCERT Act. 5.1: Healthy turgid onion cells.</div>`;
-      } else {
-        inner.className = 'wall-inner plasmolysed';
-        document.getElementById('wallTitle').textContent = 'Plasmolysed';
-        document.getElementById('wallDesc').innerHTML = 'In salt water, water leaves and the inner membrane shrinks away from the rigid wall. <span class="block mt-2 text-teal-400 font-medium pt-2 border-t border-white/10">🌍 NCERT Act. 5.6: Boiling a leaf kills it, stopping osmosis!</span>';
-        imgContainer.innerHTML = `<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rhoeo_Discolor_-_Plasmolysis.jpg" alt="Plasmolysed" class="rounded-lg shadow-lg mx-auto max-h-40 border border-white/10"><div class="text-xs text-slate-400 mt-2 italic">NCERT Act. 5.6: Plasmolysed Rheo leaves.</div>`;
-      }
-    }
-    document.querySelectorAll('.wall-mode-btn').forEach(btn => btn.addEventListener('click', () => setWall(btn.dataset.wall)));
-    setWall('normal');
-
-    const NUCLEUS_STAGES = [
-      {
-        title: 'Nucleus', desc: 'Surrounded by a double membrane with pores. <span class="block mt-2 text-amber-400 font-medium pt-2 border-t border-white/10">🏢 Analogy: The manager\'s office.</span>',
-        html: `<div class="w-40 h-40 rounded-full border-8 border-double border-blue-500 flex items-center justify-center bg-blue-500/10"><span class="font-mono text-xs text-blue-300">nucleus</span></div>`
-      },
-      {
-        title: 'Chromatin', desc: 'Inside a non-dividing cell, DNA is a loose, tangled thread.',
-        html: `<div class="w-40 h-40 rounded-full border-2 border-slate-600 flex items-center justify-center bg-black/20"><svg width="120" height="120" viewBox="0 0 120 120"><path d="M10,60 Q30,10 60,60 T110,60 Q90,110 60,60 T10,60" stroke="#fbbf24" stroke-width="2" fill="none"/><path d="M20,35 Q60,65 100,35" stroke="#38bdf8" stroke-width="2" fill="none"/><path d="M20,85 Q60,55 100,85" stroke="#fb7185" stroke-width="2" fill="none"/></svg></div>`
-      },
-      {
-        title: 'Chromosome', desc: 'Before dividing, chromatin coils tightly into visible rod shapes.',
-        html: `<div class="flex gap-4"><svg width="34" height="100"><rect x="12" y="0" width="10" height="40" rx="5" fill="#fbbf24"/><rect x="12" y="45" width="10" height="10" fill="none"/><rect x="12" y="55" width="10" height="40" rx="5" fill="#fbbf24"/></svg><svg width="34" height="100"><rect x="12" y="0" width="10" height="40" rx="5" fill="#38bdf8"/><rect x="12" y="55" width="10" height="40" rx="5" fill="#38bdf8"/></svg><svg width="34" height="100"><rect x="12" y="0" width="10" height="40" rx="5" fill="#fb7185"/><rect x="12" y="55" width="10" height="40" rx="5" fill="#fb7185"/></svg></div>`
-      },
-      {
-        title: 'DNA & Genes', desc: 'A specific functional segment of DNA is called a gene.',
-        html: `<svg width="180" height="140" viewBox="0 0 180 140"><path d="M20,20 C70,20 20,70 70,70 C120,70 70,120 120,120 C150,120 150,140 150,140" stroke="#38bdf8" stroke-width="4" fill="none"/><path d="M20,120 C70,120 20,70 70,70 C120,70 70,20 120,20 C150,20 150,10 150,10" stroke="#fb7185" stroke-width="4" fill="none"/><rect x="50" y="60" width="40" height="20" rx="4" fill="rgba(251,191,36,0.3)" stroke="#fbbf24"/><text x="55" y="74" fill="#fbbf24" font-size="10" font-family="JetBrains Mono">gene</text></svg>`
-      }
-    ];
-    let nucStageIdx = 0;
-    function renderNucleus() {
-      const s = NUCLEUS_STAGES[nucStageIdx];
-      document.getElementById('nucStage').innerHTML = s.html;
-      document.getElementById('nucTitle').innerHTML = s.title;
-      document.getElementById('nucDesc').innerHTML = s.desc;
-      document.getElementById('nucPrev').disabled = nucStageIdx === 0;
-      document.getElementById('nucNext').disabled = nucStageIdx === NUCLEUS_STAGES.length - 1;
-      document.getElementById('nucDots').innerHTML = NUCLEUS_STAGES.map((_, i) => `<span class="w-2 h-2 rounded-full ${i === nucStageIdx ? 'bg-amber-400' : 'bg-slate-700'}"></span>`).join('');
-    }
-    document.getElementById('nucNext').addEventListener('click', () => { if (nucStageIdx < NUCLEUS_STAGES.length - 1) { nucStageIdx++; renderNucleus(); } });
-    document.getElementById('nucPrev').addEventListener('click', () => { if (nucStageIdx > 0) { nucStageIdx--; renderNucleus(); } });
-    renderNucleus();
-
-    const PRO_HTML = `<div class="w-56 h-28 rounded-full border-4 border-teal-500 bg-teal-500/10 relative flex items-center justify-center shadow-[0_0_30px_rgba(45,212,191,0.2)]"><div class="flex flex-wrap gap-1 w-16 justify-center">${Array(12).fill('<span class="w-1.5 h-1.5 bg-amber-400 rounded-full"></span>').join('')}</div><div class="absolute -bottom-8 text-xs text-slate-400 text-center w-full">Nucleoid (Free DNA)</div></div>`;
-    const EUK_HTML = `<div class="w-64 h-52 rounded-[48%_52%_45%_55%/55%_45%_52%_48%] border-4 border-blue-500 bg-blue-500/10 relative shadow-[0_0_30px_rgba(56,189,248,0.15)]"><div class="absolute w-20 h-20 rounded-full border-4 border-red-400 bg-red-400/20 top-4 left-6 flex items-center justify-center text-[0.65rem] text-red-300 font-bold">Nucleus</div><div class="absolute w-10 h-5 rounded-full bg-amber-500/80 top-32 left-10"></div><div class="absolute w-10 h-5 rounded-full bg-amber-500/80 top-36 left-40 rotate-12"></div><div class="absolute w-16 h-0.5 bg-teal-400/70 top-28 left-40"></div><div class="absolute w-16 h-0.5 bg-teal-400/70 top-30 left-40"></div></div>`;
-    const PRO_FACTS = `<h3 class="text-lg font-bold text-white mb-3">Prokaryote (e.g. Bacteria)</h3><ul class="list-disc pl-5 text-sm text-slate-300 space-y-2 mb-4 flex-1"><li><strong>Size:</strong> Small (1–10 μm)</li><li><strong>Nucleus:</strong> Absent. DNA sits loose in the nucleoid.</li><li><strong>Organelles:</strong> No membrane-bound organelles.</li></ul><div class="text-sm text-amber-400 font-medium p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg mb-4">🏢 Analogy: A 1-room studio apartment.</div><div class="text-center"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/EscherichiaColi_NIAID.jpg" class="h-24 rounded mx-auto border border-white/10" onerror="this.onerror=null;this.src='https://placehold.co/120x80/121a2e/8b93a7?text=N/A';"><p class="text-xs text-slate-400 mt-2">Real E. coli bacteria</p></div>`;
-    const EUK_FACTS = `<h3 class="text-lg font-bold text-white mb-3">Eukaryote (Plant/Animal)</h3><ul class="list-disc pl-5 text-sm text-slate-300 space-y-2 mb-4 flex-1"><li><strong>Size:</strong> Larger (5–100 μm)</li><li><strong>Nucleus:</strong> True nucleus with double membrane.</li><li><strong>Organelles:</strong> Full set of distinct organelles (ER, Golgi).</li></ul><div class="text-sm text-amber-400 font-medium p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg mb-4">🏢 Analogy: A mansion with separate rooms.</div><div class="text-center"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Human_Cheek_cells.jpg" class="h-24 rounded mx-auto border border-white/10" onerror="this.onerror=null;this.src='https://placehold.co/120x80/121a2e/8b93a7?text=N/A';"><p class="text-xs text-slate-400 mt-2">Human cheek cells (NCERT 5.7)</p></div>`;
-
-    function setPE(kind) {
-      document.getElementById('peDiagram').innerHTML = kind === 'pro' ? PRO_HTML : EUK_HTML;
-      document.getElementById('peFacts').innerHTML = kind === 'pro' ? PRO_FACTS : EUK_FACTS;
-      document.querySelectorAll('.pe-mode-btn').forEach(b => {
-        if (b.dataset.pe === kind) {
-          b.classList.add('active', 'bg-slate-800', 'text-white'); b.classList.remove('bg-slate-800/50', 'text-slate-400');
-        } else {
-          b.classList.remove('active', 'bg-slate-800', 'text-white'); b.classList.add('bg-slate-800/50', 'text-slate-400');
-        }
-      });
-    }
-    document.querySelectorAll('.pe-mode-btn').forEach(btn => btn.addEventListener('click', () => setPE(btn.dataset.pe)));
-    setPE('pro');
-
-
-    /* ============ ORGANELLE EXPLORER ============ */
-    const ORGANELLES = [
-      { id: 'er', name: 'Endoplasmic Reticulum', tag: 'Factory & transport', color: '#2dd4bf', detail: 'A network of membrane tubes. Rough ER (studded with ribosomes) manufactures proteins. Smooth ER makes lipids/fats and detoxifies drugs and poisons, especially in liver cells. Together they also help build the cell membrane itself.' },
-      { id: 'golgi', name: 'Golgi Apparatus', tag: 'Packaging & dispatch', color: '#fbbf24', detail: 'A stack of membrane-bound sacs (cisterns). It receives material from the ER, modifies it, packs it into vesicles, and sends it to the right destination. It also helps form lysosomes.' },
-      { id: 'lyso', name: 'Lysosomes', tag: '"Suicide bags"', color: '#fb7185', detail: 'Sacs filled with powerful digestive enzymes made by the RER. They break down waste, worn-out cell parts, and foreign material. If the cell is damaged, they can burst and digest the cell itself — hence the nickname.' },
-      { id: 'mito', name: 'Mitochondria', tag: 'Powerhouse', color: '#4ade80', detail: 'Double-membraned organelle where cellular respiration produces ATP, the energy currency used for every activity in the cell. It carries its own DNA and ribosomes, so it can build some of its own proteins.' },
-      { id: 'plastid', name: 'Plastids', tag: 'Plant cells only', color: '#22c55e', detail: 'Chloroplasts (containing chlorophyll) carry out photosynthesis, making food using sunlight. Leucoplasts are colourless and store starch, oils, and proteins. Like mitochondria, plastids carry their own DNA.' },
-      { id: 'vacuole', name: 'Vacuoles', tag: 'Storage sac', color: '#38bdf8', detail: 'Small and temporary in animal cells. In a plant cell, one giant central vacuole can occupy 50–90% of the total cell volume, filled with cell sap that keeps the cell firm and turgid.' },
-    ];
-    let ogSelected = 'er';
-    function renderOG() {
-      document.getElementById('ogGrid').innerHTML = ORGANELLES.map(o => `
-    <button class="og-card ${o.id === ogSelected ? 'active' : ''}" data-id="${o.id}">
-      <div class="swatch" style="background:${o.color}"></div>
-      <div class="name">${o.name}</div>
-      <div class="tag">${o.tag}</div>
-    </button>`).join('');
-      const cur = ORGANELLES.find(o => o.id === ogSelected);
-      document.getElementById('ogDetail').innerHTML = `<h3 style="color:${cur.color}">${cur.name}</h3><p>${cur.detail}</p>`;
-      document.querySelectorAll('.og-card').forEach(c => c.addEventListener('click', () => { ogSelected = c.dataset.id; renderOG(); }));
-    }
-    renderOG();
-
-
-    /* ============ LABEL THE CELL (ACCURATE TEXTBOOK IMAGES) ============ */
-    const PLANT_IMG = 'cell-step7.jpg';
-    const ANIMAL_IMG = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiTfavWpKpUI25BshPopWxVIUl0akkgLllKIgkY-RwV402ybNYfXTbRiDoRIYwsKmgTKUQHoJ9kR3k0npx4R1qbghdGEXwL1_SjIXRvqmUh3-L6khnPoGcbCB-Ynj2JDNpQC8P9YUmDcs/s1600/Animal+cell4.jpg';
-
-    const PLANT_MARKERS = [
-      { slot: 1, label: 'Vacuole', top: '56%', left: '26%' },
-      { slot: 2, label: 'Nucleus', top: '57%', left: '51%' },
-      { slot: 3, label: 'Nuclear envelope', top: '40%', left: '50%' },
-      { slot: 4, label: 'Rough ER', top: '74%', left: '64%' },
-      { slot: 5, label: 'Smooth ER', top: '20%', left: '62%' },
-      { slot: 6, label: 'Golgi apparatus', top: '32%', left: '78%' },
-      { slot: 7, label: 'Chloroplast', top: '10%', left: '36%' },
-      { slot: 8, label: 'Mitochondrion', top: '88%', left: '62%' },
-      { slot: 9, label: 'Ribosomes', top: '74%', left: '84%' },
-      { slot: 10, label: 'Cytoplasm', top: '82%', left: '45%' },
-      { slot: 11, label: 'Plasma membrane', top: '86%', left: '90%' },
-      { slot: 12, label: 'Cell wall', top: '92%', left: '84%' },
-      { slot: 13, label: 'Adjacent cell wall', top: '12%', left: '92%' },
-      { slot: 14, label: 'Lysosome', top: '10%', left: '50%' }
-    ];
-
-    const ANIMAL_MARKERS = [
-      { slot: 1, label: 'Golgi apparatus', top: '25%', left: '68%' },
-      { slot: 2, label: 'Plasma membrane', top: '50%', left: '90%' },
-      { slot: 3, label: 'Nucleus', top: '48%', left: '45%' },
-      { slot: 4, label: 'Mitochondrion', top: '72%', left: '65%' },
-      { slot: 5, label: 'Rough ER', top: '62%', left: '45%' }
-    ];
-
-    let cellType = 'plant', selectedWord = null, assignments = {};
-
-    function renderLabelTab() {
-      assignments = {}; selectedWord = null;
-      const data = cellType === 'plant' ? { img: PLANT_IMG, markers: PLANT_MARKERS } : { img: ANIMAL_IMG, markers: ANIMAL_MARKERS };
-
-      // Set the native image source to guarantee it loads
-      document.getElementById('lcImage').src = data.img;
-
-      const diagramEl = document.getElementById('lcDiagram');
-      diagramEl.innerHTML = data.markers.map(m => `<div class="marker" data-slot="${m.slot}" style="top:${m.top}; left:${m.left};">${m.slot}</div>`).join('');
-
-      document.querySelectorAll('.cell-mode-btn').forEach(b => {
-        if (b.dataset.cell === cellType) {
-          b.classList.add('active', 'bg-slate-800', 'text-white'); b.classList.remove('bg-slate-800/50', 'text-slate-400');
-        } else {
-          b.classList.remove('active', 'bg-slate-800', 'text-white'); b.classList.add('bg-slate-800/50', 'text-slate-400');
-        }
+      window.addEventListener('resize', () => { if (!mobileQuery.matches) setMenu(false); });
+      document.addEventListener('click', event => {
+        if (!navLinks?.classList.contains('is-open')) return;
+        if (!nav.contains(event.target)) setMenu(false);
       });
 
-      document.getElementById('lcFeedback').textContent = '';
-
-      const words = data.markers.map(m => m.label).sort(() => Math.random() - 0.5);
-      document.getElementById('wordbank').innerHTML = words.map(w => `<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-800 border border-slate-600 text-white hover:border-amber-400 transition-colors word-chip" data-word="${w}">${w}</button>`).join('');
-
-      document.getElementById('blanks').innerHTML = data.markers.map(m => `
-      <li class="flex items-center gap-3 bg-slate-900/50 border border-white/10 rounded-lg p-2 text-sm" data-slot="${m.slot}">
-        <span class="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center font-mono text-xs text-white">${m.slot}</span>
-        <span class="ans text-slate-400 italic">— click a word, then click marker ${m.slot}</span>
-      </li>`).join('');
-
-      // Attach events
-      document.querySelectorAll('.word-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-          if (chip.classList.contains('opacity-30')) return; // Used
-          document.querySelectorAll('.word-chip').forEach(c => c.classList.remove('border-amber-400', 'text-amber-400'));
-          chip.classList.add('border-amber-400', 'text-amber-400');
-          selectedWord = chip.dataset.word;
-        });
-      });
-
-      document.querySelectorAll('.marker').forEach(marker => {
-        marker.addEventListener('click', () => {
-          if (!selectedWord) return;
-          const slot = parseInt(marker.dataset.slot);
-
-          // If the marker already has a word, restore the old word to the wordbank
-          if (assignments[slot]) {
-            const oldChip = document.querySelector(`.word-chip[data-word="${assignments[slot]}"]`);
-            if (oldChip) {
-              oldChip.classList.remove('opacity-30', 'pointer-events-none');
+      // Scroll reveal — disabled automatically for reduced-motion users by CSS.
+      const revealItems = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
             }
+          });
+        }, { threshold: .12, rootMargin: '0px 0px -30px 0px' });
+        revealItems.forEach(item => observer.observe(item));
+      } else {
+        revealItems.forEach(item => item.classList.add('is-visible'));
+      }
+
+      // Demo-mode form: accessible validation + inline success state, no fake backend claim.
+      const form = document.getElementById('inviteFormElement');
+      const status = document.getElementById('formStatus');
+      const submit = document.getElementById('formSubmit');
+      const fields = [
+        { id: 'fullName', label: 'Full Name', message: 'Please enter your full name.' },
+        { id: 'organisation', label: 'Organisation / School', message: 'Please enter your organisation or school.' },
+        { id: 'role', label: 'Role', message: 'Please select your role.' },
+        { id: 'email', label: 'Email', message: 'Please enter a valid email address.' }
+      ];
+
+      function clearFieldError(input) {
+        const error = document.getElementById(input.id + 'Error');
+        input.removeAttribute('aria-invalid');
+        if (error) error.textContent = '';
+      }
+
+      function setFieldError(input, message) {
+        const error = document.getElementById(input.id + 'Error');
+        input.setAttribute('aria-invalid', 'true');
+        if (error) error.textContent = message;
+      }
+
+      fields.forEach(({id}) => {
+        const input = document.getElementById(id);
+        input?.addEventListener('input', () => clearFieldError(input));
+        input?.addEventListener('change', () => clearFieldError(input));
+      });
+
+      form?.addEventListener('submit', event => {
+        event.preventDefault();
+        status.textContent = '';
+        status.className = 'form-status';
+        let firstInvalid = null;
+        let valid = true;
+
+        fields.forEach(({id, message}) => {
+          const input = document.getElementById(id);
+          const value = input.value.trim();
+          let fieldValid = Boolean(value);
+          if (id === 'email' && fieldValid) fieldValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+          if (!fieldValid) {
+            valid = false;
+            setFieldError(input, message);
+            if (!firstInvalid) firstInvalid = input;
+          } else {
+            clearFieldError(input);
           }
-
-          assignments[slot] = selectedWord;
-
-          marker.classList.add('filled'); marker.classList.remove('wrong');
-
-          const li = document.querySelector(`#blanks li[data-slot="${slot}"]`);
-          li.querySelector('.ans').textContent = '— ' + selectedWord;
-          li.querySelector('.ans').classList.remove('italic', 'text-slate-400');
-          li.querySelector('.ans').classList.add('text-teal-400', 'font-bold');
-          li.classList.remove('border-teal-500', 'border-red-500');
-
-          const newChip = document.querySelector(`.word-chip[data-word="${selectedWord}"]`);
-          if (newChip) {
-            newChip.classList.add('opacity-30', 'pointer-events-none');
-            newChip.classList.remove('border-amber-400', 'text-amber-400');
-          }
-          selectedWord = null;
         });
-      });
-    }
 
-    document.getElementById('checkBtn').addEventListener('click', () => {
-      const data = cellType === 'plant' ? PLANT_MARKERS : ANIMAL_MARKERS;
-      let correct = 0;
-
-      data.forEach(m => {
-        const slot = m.slot;
-        const li = document.querySelector(`#blanks li[data-slot="${slot}"]`);
-        const marker = document.querySelector(`.marker[data-slot="${slot}"]`);
-
-        if (assignments[slot] === m.label) {
-          li.classList.add('border-teal-500', 'bg-teal-500/10'); li.classList.remove('border-red-500', 'bg-red-500/10');
-          marker.classList.remove('wrong'); correct++;
-        } else {
-          li.classList.add('border-red-500', 'bg-red-500/10'); li.classList.remove('border-teal-500', 'bg-teal-500/10');
-          if (assignments[slot]) marker.classList.add('wrong');
+        if (!valid) {
+          status.textContent = 'Please review the highlighted fields.';
+          status.className = 'form-status error';
+          firstInvalid?.focus();
+          return;
         }
+
+        submit.disabled = true;
+        submit.textContent = 'Preparing…';
+
+        window.setTimeout(() => {
+          form.reset();
+          fields.forEach(({id}) => clearFieldError(document.getElementById(id)));
+          submit.disabled = false;
+          submit.textContent = 'Request an Invite';
+          status.textContent = 'Request received. Thank you. Our organising team will contact you with the next steps.';
+          status.className = 'form-status success';
+        }, 700);
       });
-
-      const fb = document.getElementById('lcFeedback');
-      fb.textContent = `${correct} / ${data.length} correct`;
-      fb.className = `text-sm font-bold text-center mt-2 h-6 ${correct === data.length ? 'text-teal-400' : 'text-amber-400'}`;
-    });
-
-    document.getElementById('resetBtn').addEventListener('click', renderLabelTab);
-    document.querySelectorAll('.cell-mode-btn').forEach(btn => btn.addEventListener('click', () => { cellType = btn.dataset.cell; renderLabelTab(); }));
-    renderLabelTab();
-
-    const RED = '#fb7185', BLUE = '#38bdf8', AMBER = '#fbbf24', TEAL = '#2dd4bf';
-    function chromHTML(color, dup) {
-      if (dup) return `<span class="chrom-pair"><span class="chrom" style="background:${color}"></span><span class="chrom" style="background:${color}"></span></span>`;
-      return `<span class="chrom" style="background:${color}"></span>`;
-    }
-    function circleCell(chroms) { return `<div class="cell-circle">${chroms.map(c => chromHTML(c.color, c.dup)).join('')}</div>`; }
-    function elongated(a, b) { return `<div class="cell-elongated"><div class="flex flex-wrap gap-1.5 justify-center w-24">${a.map(c => chromHTML(c.color, c.dup)).join('')}</div><div class="flex flex-wrap gap-1.5 justify-center w-24">${b.map(c => chromHTML(c.color, c.dup)).join('')}</div></div>`; }
-
-    const MITOSIS = [
-      { title: 'Start', desc: 'One mother cell with 4 chromosomes (each a different colour).', render: () => circleCell([{ color: RED }, { color: BLUE }, { color: AMBER }, { color: TEAL }]), cells: 1, chroms: 4 },
-      { title: 'Copy (Replication)', desc: 'Each chromosome makes an exact copy of itself (sister chromatids).', render: () => circleCell([{ color: RED, dup: true }, { color: BLUE, dup: true }, { color: AMBER, dup: true }, { color: TEAL, dup: true }]), cells: 1, chroms: 4 },
-      { title: 'Split', desc: 'The copies are pulled apart, and the cell begins to pinch.', render: () => elongated([{ color: RED }, { color: BLUE }, { color: AMBER }, { color: TEAL }], [{ color: RED }, { color: BLUE }, { color: AMBER }, { color: TEAL }]), cells: 1, chroms: 4 },
-      { title: 'Result', desc: '2 identical daughter cells. <span class="block mt-2 text-teal-400 pt-2 border-t border-white/10">🌍 Real World: Healing a cut, or a lizard growing a tail.</span>', render: () => `<div class="flex gap-6">${circleCell([{ color: RED }, { color: BLUE }, { color: AMBER }, { color: TEAL }])}${circleCell([{ color: RED }, { color: BLUE }, { color: AMBER }, { color: TEAL }])}</div>`, cells: 2, chroms: 4 },
-    ];
-    const MEIOSIS = [
-      { title: 'Start', desc: 'Mother cell with 4 chromosomes (2 matching pairs).', render: () => circleCell([{ color: RED }, { color: RED }, { color: BLUE }, { color: BLUE }]), cells: 1, chroms: 4 },
-      { title: 'Copy', desc: 'Every chromosome copies itself first.', render: () => circleCell([{ color: RED, dup: true }, { color: RED, dup: true }, { color: BLUE, dup: true }, { color: BLUE, dup: true }]), cells: 1, chroms: 4 },
-      { title: 'Meiosis I (First Split)', desc: 'Matching pairs separate. Each cell gets one red and one blue (still doubled).', render: () => elongated([{ color: RED, dup: true }, { color: BLUE, dup: true }], [{ color: RED, dup: true }, { color: BLUE, dup: true }]), cells: 1, chroms: '2 (doubled)' },
-      { title: 'After Meiosis I', desc: '2 cells now exist.', render: () => `<div class="flex gap-6">${circleCell([{ color: RED, dup: true }, { color: BLUE, dup: true }])}${circleCell([{ color: RED, dup: true }, { color: BLUE, dup: true }])}</div>`, cells: 2, chroms: '2 (doubled)' },
-      { title: 'Meiosis II (Second Split)', desc: 'Sister chromatids separate. No copying this time.', render: () => `<div class="flex gap-6">${elongated([{ color: RED }, { color: BLUE }], [{ color: RED }, { color: BLUE }])}${elongated([{ color: RED }, { color: BLUE }], [{ color: RED }, { color: BLUE }])}</div>`, cells: 2, chroms: 2 },
-      { title: 'Result', desc: '4 cells, each with HALF the original chromosomes. <span class="block mt-2 text-teal-400 pt-2 border-t border-white/10">🌍 Real World: Making sperm/eggs so a baby gets half traits from each parent.</span>', render: () => `<div class="flex gap-4">${[0, 1, 2, 3].map(() => circleCell([{ color: RED }, { color: BLUE }])).join('')}</div>`, cells: 4, chroms: 2 },
-    ];
-
-    let mode = 'mitosis', stage = 0;
-    function getStages() { return mode === 'mitosis' ? MITOSIS : MEIOSIS; }
-
-    function renderStage() {
-      const s = getStages()[stage];
-      document.getElementById('stageRow').innerHTML = s.render();
-      document.getElementById('stageTitle').innerHTML = s.title;
-      document.getElementById('stageDesc').innerHTML = s.desc;
-      document.getElementById('badgeCells').textContent = 'Cells: ' + s.cells;
-      document.getElementById('badgeChroms').textContent = 'Chromosomes/Cell: ' + s.chroms;
-
-      document.getElementById('prevStage').disabled = stage === 0;
-      document.getElementById('nextStage').disabled = stage === getStages().length - 1;
-      document.getElementById('stepDots').innerHTML = getStages().map((_, i) => `<span class="w-2 h-2 rounded-full ${i === stage ? 'bg-amber-400' : 'bg-slate-700'}"></span>`).join('');
-
-      document.querySelectorAll('.div-mode-btn').forEach(b => {
-        if (b.dataset.mode === mode) {
-          b.classList.add('active', 'bg-slate-800', 'text-white'); b.classList.remove('bg-slate-800/50', 'text-slate-400');
-        } else {
-          b.classList.remove('active', 'bg-slate-800', 'text-white'); b.classList.add('bg-slate-800/50', 'text-slate-400');
-        }
-      });
-    }
-
-    document.querySelectorAll('.div-mode-btn').forEach(btn => btn.addEventListener('click', () => { mode = btn.dataset.mode; stage = 0; renderStage(); }));
-    document.getElementById('nextStage').addEventListener('click', () => { if (stage < getStages().length - 1) { stage++; renderStage(); } });
-    document.getElementById('prevStage').addEventListener('click', () => { if (stage > 0) { stage--; renderStage(); } });
-    renderStage();
-
+    })();
   </script>
 </body>
-
 </html>
